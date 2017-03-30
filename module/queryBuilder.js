@@ -14,6 +14,13 @@ _table,
 _option,
 _params
 
+function returnSymbolParamsCount (columns) {
+  let length = columns.length
+  let symbols = Array(length).join('?, ')
+  let v = symbols.slice(0, -2)
+  return v
+}
+
 module.exports = {
   select: function (columns) {
     if (Array.isArray(columns)) {
@@ -28,7 +35,15 @@ module.exports = {
   },
   from: function (table) {
     if (table.length > 0) {
-      _table = ` FROM ${table}`
+      _from = ` FROM ${table}`
+    } else {
+      throw new Error('The table variable is required to be string!')
+    }
+    return this
+  },
+  table: function (table) {
+    if (table.length > 0) {
+      _table = table
     } else {
       throw new Error('The table variable is required to be string!')
     }
@@ -47,6 +62,18 @@ module.exports = {
     return this
   },
   add: function (columns) {
+    if (Array.isArray(columns)) {
+      let symbols = returnSymbolParamsCount(columns)
+      if (symbols.length > 0) {
+        _insert = 'INSERT INTO `' + _table + '` ( ' + symbols + ' ) VALUES ( ' + symbols + ' )'
+        _option = 'insert'
+      } else {
+        throw new Error('The columns is empty!')
+      }
+    } else {
+      throw new Error('The columns is required to be array!')
+    }
+
     return this
   }
 }
