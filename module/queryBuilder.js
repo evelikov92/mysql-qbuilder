@@ -207,6 +207,34 @@ module.exports = {
   },
 
   /**
+   * [Order clause on sql query which is order by one column]
+   * @param  {String}  column         [The column on table with which is to be ordered]
+   * @param  {Boolean} [isDesc=false] [Do is desc or asc]
+   * @return {QueryBuilder}           [Query Builder Creator of sql queries and connect to database]
+   */
+  orderBy: function (column, isDesc = false) {
+    if (typeof column !== 'string') {
+      throw new Error('The column variable is required to be string!')
+    }
+    _orderBy = ` ORDER BY ${column} `
+    if (isDesc) {
+      _orderBy += ' DESC '
+    }
+    return this
+  },
+
+  groupBy: function (column, isDesc = false) {
+    if (typeof column !== 'string') {
+      throw new Error('The column variable is required to be string!')
+    }
+    _groupBy = ` GROUP BY ${column} `
+    if (isDesc) {
+      _orderBy += ' DESC '
+    }
+    return this
+  },
+
+  /**
    * [Where clause on sql query which is check do column is some equal with param]
    * @param  {String} column         [Column from database table to check do is some equal with param]
    * @param  {String} [operator='='] [Operator for comparison the column and parameter]
