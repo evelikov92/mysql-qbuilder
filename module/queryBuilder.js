@@ -1,3 +1,5 @@
+const connector = require('./connector')
+
 let _where,
   _select,
   _from,
@@ -268,6 +270,10 @@ module.exports = {
    */
   andWhere: function (column, operator = '=', param = null) {
     return this
+  },
+
+  orWhere: function (column, operator = '=', param = null) {
+
   },
 
   /**
