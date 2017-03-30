@@ -373,22 +373,6 @@ module.exports = {
     _update = ''
     _delete = ''
 
-    return this
-  },
-
-  /**
-   * [Execute the created sql query]
-   * @return {Boolean} [Do is executed correct]
-   */
-  execute: function () {
-    return true
-  },
-
-  /**
-   * [Get the result from created sql query]
-   * @return {[type]} [SQL Query result]
-   */
-  get: () => {
-
+    return _command
   }
 }
