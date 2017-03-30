@@ -8,5 +8,5 @@ module.exports = (dbSetting) => {
     database: dbSetting.database
   })
 
-  connection.connect()
+  return connection
 }
