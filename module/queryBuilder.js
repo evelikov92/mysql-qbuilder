@@ -161,10 +161,56 @@ module.exports = {
   },
 
   /**
+   * [Take clause on sql query which is set how many records to take from database table]
+   * @param  {Number} limit [How many items to take]
+   * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
+   */
+  take: function (limit) {
+    limit = parseInt(limit)
+    if (isNaN(limit)) {
+      throw new Error('The limit variable is required to be Integer!')
+    }
+    _limit = ` LIMIT ${limit}`
+    return this
+  },
+
+  /**
+   * [Skip clause on sql query which is set how many records to skip from database table]
+   * @param  {Number} count [How many items to skip]
+   * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
+   */
+  skip: function (count) {
+    count = parseInt(count)
+    if (isNaN(count)) {
+      throw new Error('The count variable is required to be Integer!')
+    }
+    _skip = ` OFFSET ${count}`
+    return this
+  },
+
+  /**
+   * [Top clause on sql query which is set how many records to get from database table]
+   * @param  {Number} count [How many items to show]
+   * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
+   */
+  top: function (count) {
+    if (_select) {
+      throw new Error('Is need to not have select!')
+    }
+    count = parseInt(count)
+    if (isNaN(count)) {
+      throw new Error('The count variable is required to be Integer!')
+    }
+    _select = `SELECT TOP ${count} `
+    _option = 'select'
+    return this
+  },
+
+  /**
    * [Where clause on sql query which is check do column is some equal with param]
    * @param  {String} column         [Column from database table to check do is some equal with param]
-   * @param  {String} [param=null]   [Value to check do column from database table is some equal with value]
    * @param  {String} [operator='='] [Operator for comparison the column and parameter]
+   * @param  {String} [param=null]   [Value to check do column from database table is some equal with value]
    * @return {QueryBuilder}          [Query Builder Creator of sql queries and connect to database]
    */
   where: function (column, operator = '=', param = null) {
@@ -177,5 +223,16 @@ module.exports = {
     } else {
       throw new Error('The column and operator variable is required to be string!')
     }
+  },
+
+  /**
+   * [If is used the where clause then that is next where clause if is need both to be true]
+   * @param  {String} column         [Column from database table to check do is some equal with param]
+   * @param  {String} [operator='='] [Operator for comparison the column and parameter]
+   * @param  {String} [param=null]   [Value to check do column from database table is some equal with value]
+   * @return {QueryBuilder}          [Query Builder Creator of sql queries and connect to database]
+   */
+  andWhere: function (column, operator = '=', param = null) {
+    return this
   }
 }
