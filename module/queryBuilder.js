@@ -35,6 +35,18 @@ module.exports = {
     return this
   },
   addSelect: function (columns) {
-    
+    if (!_select) {
+      throw new Error('Please first use SELECT method before add new column on select method!')
+    } else if (Array.isArray(columns)) {
+      _select += ` ${columns.join(', ')}`
+    } else if (columns.length > 0) {
+      _select += ` ${columns}`
+    } else {
+      throw new Error('The columns is not available in correct format!')
+    }
+    return this
+  },
+  add: function (columns) {
+    return this
   }
 }
