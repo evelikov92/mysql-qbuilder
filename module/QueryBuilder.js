@@ -1,20 +1,20 @@
-const connector = require('./connector')
+const connector = require('./Connector')
 
-let _where,
-  _select,
-  _from,
-  _orderBy,
-  _groupBy,
-  _limit,
-  _skip,
-  _join,
-  _insert,
-  _delete,
-  _update,
-  _command,
-  _table,
-  _option,
-  _params
+let _where = ''
+let _select = ''
+let _from = ''
+let _orderBy = ''
+let _groupBy = ''
+let _limit = ''
+let _skip = ''
+let _join = ''
+let _insert = ''
+let _delete = ''
+let _update = ''
+let _command = ''
+let _table = ''
+let _option = ''
+let _params = []
 
 /**
  * [Generate ? symbol for sql query for every parameter]
@@ -42,6 +42,7 @@ module.exports = {
     } else {
       throw new Error('The columns is not available in correct format!')
     }
+
     _option = 'select'
     return this
   },
@@ -90,6 +91,7 @@ module.exports = {
     } else {
       throw new Error('The columns is not available in correct format!')
     }
+
     return this
   },
 
@@ -101,6 +103,7 @@ module.exports = {
   add: function (columns) {
     if (Array.isArray(columns)) {
       let symbols = returnSymbolParamsCount(columns)
+
       if (symbols.length > 0) {
         _insert = 'INSERT INTO `' + _table + '` ( ' + symbols + ' ) VALUES ( ' + symbols + ' )'
         _option = 'insert'
@@ -136,9 +139,11 @@ module.exports = {
     if (!Array.isArray(columns)) {
       throw new Error('The columns variable is required to be array!')
     }
+
     if (!_table) {
       throw new Error('Is need to enter in which table is need to delete record!')
     }
+
     let cl = columns.map((cl) => { return cl + ' = ?, ' })
     _update = `UPDATE ${_table} SET ${cl.join('').slice(0, -2)}`
     _option = 'update'
@@ -169,9 +174,11 @@ module.exports = {
    */
   take: function (limit) {
     limit = parseInt(limit)
+
     if (isNaN(limit)) {
       throw new Error('The limit variable is required to be Integer!')
     }
+
     _limit = ` LIMIT ${limit}`
     return this
   },
@@ -183,9 +190,11 @@ module.exports = {
    */
   skip: function (count) {
     count = parseInt(count)
+
     if (isNaN(count)) {
       throw new Error('The count variable is required to be Integer!')
     }
+
     _skip = ` OFFSET ${count}`
     return this
   },
@@ -199,10 +208,13 @@ module.exports = {
     if (_select) {
       throw new Error('Is need to not have select!')
     }
+
     count = parseInt(count)
+
     if (isNaN(count)) {
       throw new Error('The count variable is required to be Integer!')
     }
+
     _select = `SELECT TOP ${count} `
     _option = 'select'
     return this
@@ -218,10 +230,13 @@ module.exports = {
     if (typeof column !== 'string') {
       throw new Error('The column variable is required to be string!')
     }
+
     _orderBy = ` ORDER BY ${column} `
+
     if (isDesc) {
       _orderBy += ' DESC '
     }
+
     return this
   },
 
@@ -235,10 +250,13 @@ module.exports = {
     if (typeof column !== 'string') {
       throw new Error('The column variable is required to be string!')
     }
+
     _groupBy = ` GROUP BY ${column} `
+
     if (isDesc) {
-      _orderBy += ' DESC '
+      _groupBy += ' DESC '
     }
+
     return this
   },
 
@@ -252,9 +270,11 @@ module.exports = {
   where: function (column, operator = '=', param = null) {
     if (typeof column === 'string' && typeof operator === 'string') {
       _where = ` WHERE ${column} ${operator.replace(/'"/g, '')} ?`
+
       if (param && !Array.isArray(param)) {
         _params.push(param)
       }
+
       return this
     } else {
       throw new Error('The column and operator variable is required to be string!')
@@ -291,10 +311,12 @@ module.exports = {
    */
   setParameters: function (values) {
     let len = values.length
+
     if (len > 0) {
       for (let i = 0; i < len; i++) {
         _params.push(values[i])
       }
+
       return this
     } else {
       throw new Error('The values variable is required to be array!')
@@ -320,5 +342,45 @@ module.exports = {
     }
     _command = command
     return this
+  },
+
+  /**
+   * [Prepare the sql query and set what kind of query is will used]
+   * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
+   */
+  prepare: function () {
+    if (_option === 'select') {
+      _command = _select + _from + _join + _groupBy + _where + _orderBy + _limit + _skip
+    } else if (_option === 'insert') {
+      _command = _insert
+    } else if (_option === 'update') {
+      _command = _update + _where
+    } else if (_option === 'delete') {
+      _command = _delete + _where
+    } else {
+      _command = _where + _limit + _skip
+    }
+
+    _select = ''
+    _from = ''
+    _join = ''
+    _groupBy = ''
+    _where = ''
+    _orderBy = ''
+    _limit = ''
+    _skip = ''
+    _insert = ''
+    _update = ''
+    _delete = ''
+
+    return this
+  },
+
+  execute: function () {
+
+  },
+
+  get: () => {
+
   }
 }
