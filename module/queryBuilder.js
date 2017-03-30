@@ -209,7 +209,7 @@ module.exports = {
   /**
    * [Order clause on sql query which is order by one column]
    * @param  {String}  column         [The column on table with which is to be ordered]
-   * @param  {Boolean} [isDesc=false] [Do is desc or asc]
+   * @param  {Boolean} [isDesc=false] [Do is DESC or ASC]
    * @return {QueryBuilder}           [Query Builder Creator of sql queries and connect to database]
    */
   orderBy: function (column, isDesc = false) {
@@ -223,6 +223,12 @@ module.exports = {
     return this
   },
 
+  /**
+   * [Group clause on sql query which is set the grouped by column]
+   * @param  {String}  column         [The column on table with which is to be grouped]
+   * @param  {Boolean} [isDesc=false] [Do is DESC or ASC]
+   * @return {QueryBuilder}           [Query Builder Creator of sql queries and connect to database]
+   */
   groupBy: function (column, isDesc = false) {
     if (typeof column !== 'string') {
       throw new Error('The column variable is required to be string!')
@@ -245,7 +251,7 @@ module.exports = {
     if (typeof column === 'string' && typeof operator === 'string') {
       _where = ` WHERE ${column} ${operator.replace(/'"/g, '')} ?`
       if (param && !Array.isArray(param)) {
-        _params[column] = param
+        _params.push(param)
       }
       return this
     } else {
@@ -261,6 +267,52 @@ module.exports = {
    * @return {QueryBuilder}          [Query Builder Creator of sql queries and connect to database]
    */
   andWhere: function (column, operator = '=', param = null) {
+    return this
+  },
+
+  /**
+   * [Get all sql query parameters]
+   * @return {Array} [SQL Query parameters]
+   */
+  getParameters: () => {
+    return _params
+  },
+
+  /**
+   * [Set parameters for created sql query]
+   * @param  {Array} values [SQL query parameres only values]
+   * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
+   */
+  setParameters: function (values) {
+    let len = values.length
+    if (len > 0) {
+      for (let i = 0; i < len; i++) {
+        _params.push(values[i])
+      }
+      return this
+    } else {
+      throw new Error('The values variable is required to be array!')
+    }
+  },
+
+  /**
+   * [Get the created sql query]
+   * @return {String} [SQL Query]
+   */
+  getCommand: () => {
+    return _command
+  },
+
+  /**
+   * [Set Your own SQL Query]
+   * @param  {String} command [SQL Query]
+   * @return {QueryBuilder}   [Query Builder Creator of sql queries and connect to database]
+   */
+  setCommand: function (command) {
+    if (typeof command !== 'string') {
+      throw new Error('The command variable is required to be string!')
+    }
+    _command = command
     return this
   }
 }
