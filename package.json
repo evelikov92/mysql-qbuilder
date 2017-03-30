@@ -1,0 +1,23 @@
+{
+  "name": "mysql-query-builder",
+  "version": "1.0.0",
+  "description": "NodeJS MySQL Query Builder",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evelikov92/MySQL-Query-Builder.git"
+  },
+  "author": "Evgeni Velikov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/evelikov92/MySQL-Query-Builder/issues"
+  },
+  "homepage": "https://github.com/evelikov92/MySQL-Query-Builder#readme",
+  "dependencies": {
+    "mysql": "2.13.0",
+    "standard": "9.0.2"
+  }
+}
