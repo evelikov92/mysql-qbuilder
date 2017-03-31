@@ -36,7 +36,7 @@ qBuilder.prepare().getResult() // Prepare the sql query and get the result
 ```
 
 ## What You get from that module
-All common cases to use the query `clauses`
+All common cases to use the `sql query clauses`
 ---
 * `SELECT`
 * * `SELECT ADD`
