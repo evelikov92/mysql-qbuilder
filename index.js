@@ -116,20 +116,20 @@ exports.execute = function () {
 
 /**
  * [Get the result from created sql query]
- * @return {[type]} [description]
+ * @param {fn} callback [description]
  */
-exports.getResult = () => {
+exports.getResult = (callback) => {
   if (_query.indexOf('?') !== -1) {
     _params = this.getParameters()
 
     connection.query(_query, _params, (err, rows, fields) => {
-      if (err) console.log(err)
-      return JSON.parse(JSON.stringify(rows))
+      if (err) callback(err, null)
+      callback(null, JSON.parse(JSON.stringify(rows)))
     })
   } else {
     connection.query(_query, (err, rows, fields) => {
-      if (err) console.log(err)
-      return JSON.parse(JSON.stringify(rows))
+      if (err) callback(err, null)
+      callback(null, JSON.parse(JSON.stringify(rows)))
     })
   }
 }
@@ -147,3 +147,15 @@ exports.connectToDatabase = () => {
 exports.closeTheConnection = () => {
   connection.end()
 }
+
+// exports.setOptions({
+//   hostname: 'localhost',
+//   username: 'root',
+//   password: '',
+//   database: 'distribution'
+// })
+
+// exports.makeQuery().select('*').from('ads')
+// exports.prepare().getResult((err, data) => {
+//   console.log(data)
+// })
