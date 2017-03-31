@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 const qBuilder = require('./lib/QueryBuilder')
+const qModel = require('./lib/ModelBinding')
 
 let connection = null
 let _query = ''
@@ -25,6 +26,16 @@ exports.setOptions = (dbSetting) => {
     password: dbSetting.password,
     database: dbSetting.database
   })
+}
+
+/**
+ * [useModel description]
+ * @param  {Object} schema [description]
+ * @param {String} table   [Database table for that schema]
+ * @return {ModelBinding}  [description]
+ */
+exports.useModel = (schema, table) => {
+  return qModel.setSchema(schema, table)
 }
 
 /**
