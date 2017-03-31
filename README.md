@@ -10,9 +10,10 @@ Query builder for MySQL working with NodeJS
 * Write Your own sql queries and send to module for execution
 
 ## How to install
-``` 
+```
 npm install mysql-qbuilder
 ```
+To add this npm package to your local machine, type the above into your command line. You’ll notice a node_modules directory appear in your root where the package is now installed.
 
 ## How to used
 ```JavaScript
@@ -31,7 +32,7 @@ qBuilder.makeQuery() // Start to make query
   .select('id, title, someDiff') // Select all columns which You want to get from database. Here You can use the string which the columns is separated with comma or for more simple used the Array of columns
   .from('testTable') // From which table You get the elements
   .where('id', '>', 1) // Some where clasue
-qBuilder.prepare().getResult() // Prepare the sql query and get the result 
+qBuilder.prepare().getResult() // Prepare the sql query and get the result
 // getResult() will return the all elements which You can get like a Object.
 ```
 
@@ -48,7 +49,7 @@ All common cases to use the `sql query clauses`
 * `TOP`
 * `OFFSET`
 * `LIMIT`
-* `WHERE` 
+* `WHERE`
 * * `WHERE AND`
 * * `WHERE OR`
 * * `WHERE COLUMN`
