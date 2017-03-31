@@ -136,16 +136,3 @@ exports.connectToDatabase = () => {
 exports.closeTheConnection = () => {
   connection.end()
 }
-
-exports.setOptions({
-  hostname: 'localhost',
-  username: 'root',
-  password: '',
-  database: 'distribution'
-})
-
-exports.makeQuery()
-  .select('id, title, count')
-  .from('ads')
-  .where('id', '>', 1)
-exports.prepare().getResult()
