@@ -1,5 +1,3 @@
-const connector = require('./Connector')
-
 let _where = ''
 let _select = ''
 let _from = ''
@@ -293,7 +291,7 @@ module.exports = {
   },
 
   orWhere: function (column, operator = '=', param = null) {
-
+    return this
   },
 
   /**
@@ -321,27 +319,6 @@ module.exports = {
     } else {
       throw new Error('The values variable is required to be array!')
     }
-  },
-
-  /**
-   * [Get the created sql query]
-   * @return {String} [SQL Query]
-   */
-  getCommand: () => {
-    return _command
-  },
-
-  /**
-   * [Set Your own SQL Query]
-   * @param  {String} command [SQL Query]
-   * @return {QueryBuilder}   [Query Builder Creator of sql queries and connect to database]
-   */
-  setCommand: function (command) {
-    if (typeof command !== 'string') {
-      throw new Error('The command variable is required to be string!')
-    }
-    _command = command
-    return this
   },
 
   /**
