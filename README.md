@@ -38,27 +38,30 @@ qBuilder.prepare().getResult() // Prepare the sql query and get the result
 ## What You get from that module
 All common cases to use the query "clauses"
 ---
-* SELECT
-* INSERT
-* DELETE
-* UPDATE
-* ORDER BY
-* GROUP BY
-* TOP
-* OFFSET
-* LIMIT
-* WHERE 
-* WHERE AND
-* WHERE OR
-* WHERE COLUMN
-* WHERE DATE
-* WHERE NOT IN
-* WHERE IN
-* WHERE BETWEEN
-* WHERE NOT BETWEEN
-* WHERE NULL
-* WHERE NOT NULL
-* WHERE AND OR
-* JOIN
-* FROM
-* ADD SELECT
+* `SELECT`
+* * `SELECT ADD`
+* `INSERT`
+* `DELETE`
+* `UPDATE`
+* `ORDER BY`
+* `GROUP BY`
+* `TOP`
+* `OFFSET`
+* `LIMIT`
+* `WHERE` 
+* * `WHERE AND`
+* * `WHERE OR`
+* * `WHERE COLUMN`
+* * `WHERE DATE`
+* * `WHERE NOT IN`
+* * `WHERE IN`
+* * `WHERE BETWEEN`
+* * `WHERE NOT BETWEEN`
+* * `WHERE NULL`
+* * `WHERE NOT NULL`
+* * `WHERE AND OR`
+* `JOIN`
+* `FROM`
+
+# NOTE
+### The where clause is still on development mode
