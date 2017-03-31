@@ -1,8 +1,8 @@
 const mysql = require('mysql')
 const qBuilder = require('./QueryBuilder')
 
-let query = ''
-let params = []
+let _query = ''
+let _params = []
 
 module.exports = (dbSetting) => {
   let connection = mysql.createConnection({
@@ -12,26 +12,31 @@ module.exports = (dbSetting) => {
     database: dbSetting.database
   })
 
-  connection.connect()
-
   return {
     makeQuery: () => {
       return qBuilder
     },
     prepare: () => {
-      query = qBuilder.prepare()
+      _query = qBuilder.prepare()
     },
     setParameters: (params) => {
+      _params = params
       qBuilder.setParameters(params)
     },
     getParameters: () => {
-      params = qBuilder.getParameters()
+      _params = qBuilder.getParameters()
     },
     execute: () => {
-      // connection.query(query)
+      // connection.query(_query)
     },
     get: () => {
 
+    },
+    connectToDatabase: () => {
+      connection.connect()
+    },
+    endConnection: () => {
+      connection.end()
     }
   }
 }
