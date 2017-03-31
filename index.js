@@ -50,9 +50,9 @@ exports.prepare = () => {
  * @param {Array} params  [description]
  * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
  */
-exports.setParameters = (params) => {
+exports.setParameters = function (params) {
   qBuilder.setParameters(params)
-  _params = params
+  _params = this.getParameters()
   return this
 }
 
@@ -87,14 +87,16 @@ exports.setCommand = function (command) {
  * [Execute the created sql query]
  * @return {QueryBuilder}   [Query Builder Creator of sql queries and connect to database]
  */
-exports.execute = () => {
-  if (_params.length === 0) {
-    connection.query(_query, () => {
+exports.execute = function () {
+  if (_query.indexOf('?') !== -1) {
+    _params = this.getParameters()
 
+    connection.query(_query, _params, (err, result) => {
+      if (err) console.log(err)
     })
   } else {
-    connection.query(_query, params, () => {
-
+    connection.query(_query, (err, result) => {
+      if (err) console.log(err)
     })
   }
 
@@ -106,7 +108,19 @@ exports.execute = () => {
  * @return {[type]} [description]
  */
 exports.getResult = () => {
+  if (_query.indexOf('?') !== -1) {
+    _params = this.getParameters()
 
+    connection.query(_query, _params, (err, rows, fields) => {
+      if (err) console.log(err)
+      return JSON.parse(JSON.stringify(rows))
+    })
+  } else {
+    connection.query(_query, (err, rows, fields) => {
+      if (err) console.log(err)
+      return JSON.parse(JSON.stringify(rows))
+    })
+  }
 }
 
 /**
@@ -122,3 +136,16 @@ exports.connectToDatabase = () => {
 exports.closeTheConnection = () => {
   connection.end()
 }
+
+exports.setOptions({
+  hostname: 'localhost',
+  username: 'root',
+  password: '',
+  database: 'distribution'
+})
+
+exports.makeQuery()
+  .select('id, title, count')
+  .from('ads')
+  .where('id', '>', 1)
+exports.prepare().getResult()
