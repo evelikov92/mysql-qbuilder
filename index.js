@@ -1,9 +1,18 @@
 const mysql = require('mysql')
-const qBuilder = require('./module/QueryBuilder')
+const qBuilder = require('./lib/QueryBuilder')
 
 let connection = null
 let _query = ''
 let _params = []
+
+/**
+ * [Check do user is already connected]
+ */
+function checkConnection () {
+  if (connection.state === 'disconnected') {
+    connection.connect()
+  }
+}
 
 /**
  * [setOptions description]
@@ -31,6 +40,7 @@ exports.makeQuery = () => {
  * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
  */
 exports.prepare = () => {
+  checkConnection()
   _query = qBuilder.prepare()
   return this
 }
@@ -78,6 +88,16 @@ exports.setCommand = function (command) {
  * @return {QueryBuilder}   [Query Builder Creator of sql queries and connect to database]
  */
 exports.execute = () => {
+  if (_params.length === 0) {
+    connection.query(_query, () => {
+
+    })
+  } else {
+    connection.query(_query, params, () => {
+
+    })
+  }
+
   return this
 }
 
@@ -93,7 +113,7 @@ exports.getResult = () => {
  * [Connect to MySQL server]
  */
 exports.connectToDatabase = () => {
-  connection.connect()
+  checkConnection()
 }
 
 /**
