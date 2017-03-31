@@ -1,8 +1,50 @@
-const connector = require('./module/Connector')
+// const builder = require('mysql-qbuilder')
+// let builder = builder({
+//   hostname: '',
+//   username: '',
+//   password: '',
+//   database: ''
+// })
 
-let builder = connector({
-  hostname: '',
-  username: '',
-  password: '',
-  database: ''
-})
+const mysql = require('mysql')
+const qBuilder = require('./module/QueryBuilder')
+
+let _query = ''
+let _params = []
+
+module.exports = (dbSetting) => {
+  let connection = mysql.createConnection({
+    host: dbSetting.hostname,
+    user: dbSetting.username,
+    password: dbSetting.password,
+    database: dbSetting.database
+  })
+
+  return {
+    makeQuery: () => {
+      return qBuilder
+    },
+    prepare: () => {
+      _query = qBuilder.prepare()
+    },
+    setParameters: (params) => {
+      _params = params
+      qBuilder.setParameters(params)
+    },
+    getParameters: () => {
+      _params = qBuilder.getParameters()
+    },
+    execute: () => {
+      // connection.query(_query)
+    },
+    get: () => {
+
+    },
+    connectToDatabase: () => {
+      connection.connect()
+    },
+    endConnection: () => {
+      connection.end()
+    }
+  }
+}

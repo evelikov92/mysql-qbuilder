@@ -1,7 +1,7 @@
 {
-  "name": "mysql-query-builder",
+  "name": "mysql-qbuilder",
   "version": "1.0.1",
-  "description": "NodeJS MySQL Query Builder",
+  "description": "Query Builder for MySQL",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/evelikov92/MySQL-Query-Builder#readme",
   "dependencies": {
-    "mysql": "2.13.0",
-    "standard": "9.0.2"
+    "mysql": "2.13.0"
   }
 }
