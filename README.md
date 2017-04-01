@@ -209,7 +209,7 @@ qBuilder.prepare()
 ```
 
 
-### If you don't trust of the developer then You have option to write query yourself like
+### If You don't trust of the developer then You have option to write Your own query
 
 ```JavaScript
 qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
@@ -230,7 +230,7 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
 ```
 
 
-### For more advanced functions used that
+### For more mysql advanced functions used that
 
 ```JavaScript
 qBuilder.getMysql()
