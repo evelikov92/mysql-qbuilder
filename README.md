@@ -14,7 +14,7 @@ Query builder for MySQL working with NodeJS
 npm install mysql-qbuilder
 ```
 
-To add this npm package to your local machine, type the above into your command line. You�ll notice a node_modules directory appear in your root where the package is now installed.
+To add this npm package to your local machine, type the above into your command line. You will notice a node_modules directory appear in your root where the package is now installed.
 
 
 ## What You get from that module
