@@ -38,11 +38,11 @@ exports.getMysql = () => {
 
 /**
  * [useModel description]
- * @param  {Object} schema [description]
+ * @param  {Array} schema [List of columns on table which You want to used for current case]0
  * @param {String} table   [Database table for that schema]
  * @return {ModelBinding}  [description]
  */
-exports.useModel = (schema, table) => {
+exports.useSchema = (schema, table) => {
   return qModel.setSchema(schema, table)
 }
 
