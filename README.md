@@ -13,15 +13,50 @@ Query builder for MySQL working with NodeJS
 ```
 npm install mysql-qbuilder
 ```
+
 To add this npm package to your local machine, type the above into your command line. You�ll notice a node_modules directory appear in your root where the package is now installed.
 
-## How to used
+
+## What You get from that module
+All common cases to use the `sql query clauses`
+---
+* `SELECT`
+* * `SELECT ADD`
+* `INSERT`
+* `DELETE`
+* `UPDATE`
+* `ORDER BY`
+* `GROUP BY`
+* `TOP`
+* `OFFSET`
+* `LIMIT`
+* `WHERE`
+* * `WHERE AND`
+* * `WHERE OR`
+* * `WHERE COLUMN`
+* * `WHERE DATE`
+* * `WHERE NOT IN`
+* * `WHERE IN`
+* * `WHERE BETWEEN`
+* * `WHERE NOT BETWEEN`
+* * `WHERE NULL`
+* * `WHERE NOT NULL`
+* * `WHERE AND OR`
+* `JOIN`
+* `FROM`
+* `TABLE`
+
+
+## How to use
+
+### Require the module
 ```JavaScript
 const qBuilder = require('mysql-qbuilder')
 ```
 
+
+### Set the parameters for mysql connection
 ```JavaScript
-// Set the parameters for mysql connection
 qBuilder.setOptions({
  hostname: 'localhost',
  username: 'root',
@@ -30,11 +65,15 @@ qBuilder.setOptions({
 })
 ```
 
+
+### Start to make query
 ```JavaScript
-// Start to make query
 qBuilder.makeQuery()
+```
 
 
+### Used one of that functions for create sql query
+```JavaScript
   // Select few columns used String or Array
   .select('id, title, someDiff')
 
@@ -133,7 +172,6 @@ qBuilder.makeQuery()
 
   // Find all records where title and name is the same
   .whereColumn('title', 'name', '=')
-
 ```
 
 
@@ -198,34 +236,7 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
 qBuilder.getMysql()
 ```
 
-## What You get from that module
-All common cases to use the `sql query clauses`
----
-* `SELECT` V
-* * `SELECT ADD`
-* `INSERT` V
-* `DELETE`
-* `UPDATE`
-* `ORDER BY`
-* `GROUP BY`
-* `TOP`
-* `OFFSET`
-* `LIMIT`
-* `WHERE` V
-* * `WHERE AND`
-* * `WHERE OR`
-* * `WHERE COLUMN`
-* * `WHERE DATE`
-* * `WHERE NOT IN`
-* * `WHERE IN`
-* * `WHERE BETWEEN`
-* * `WHERE NOT BETWEEN`
-* * `WHERE NULL`
-* * `WHERE NOT NULL`
-* * `WHERE AND OR`
-* `JOIN`
-* `FROM` V
-* `TABLE` V
+
 
 # NOTE
 ## The clauses is still on testing mode
