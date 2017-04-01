@@ -1,6 +1,6 @@
 {
   "name": "mysql-qbuilder",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Query Builder for MySQL",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evelikov92/MySQL-Query-Builder.git"
+    "url": "git+https://github.com/evelikov92/mysql-qbuilder.git"
   },
   "author": "Evgeni Velikov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/evelikov92/MySQL-Query-Builder/issues"
+    "url": "https://github.com/evelikov92/mysql-qbuilder/issues"
   },
-  "homepage": "https://github.com/evelikov92/MySQL-Query-Builder#readme",
+  "homepage": "https://github.com/evelikov92/mysql-qbuilder#readme",
   "dependencies": {
     "mysql": "2.13.0"
   }
