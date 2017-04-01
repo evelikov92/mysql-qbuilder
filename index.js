@@ -29,6 +29,14 @@ exports.setOptions = (dbSetting) => {
 }
 
 /**
+ * [Get the MySQL module package for more advanced functions]
+ * @return {MySQL} [Mysql module package]
+ */
+exports.getMysql = () => {
+  return mysql
+}
+
+/**
  * [useModel description]
  * @param  {Object} schema [description]
  * @param {String} table   [Database table for that schema]
@@ -104,10 +112,14 @@ exports.execute = function () {
 
     connection.query(_query, _params, (err, result) => {
       if (err) console.log(err)
+      qBuilder.resetParameters()
+      _params = []
     })
   } else {
     connection.query(_query, (err, result) => {
       if (err) console.log(err)
+      qBuilder.resetParameters()
+      _params = []
     })
   }
 
@@ -124,11 +136,15 @@ exports.getResult = (callback) => {
 
     connection.query(_query, _params, (err, rows, fields) => {
       if (err) callback(err, null)
+      qBuilder.resetParameters()
+      _params = []
       callback(null, JSON.parse(JSON.stringify(rows)))
     })
   } else {
     connection.query(_query, (err, rows, fields) => {
       if (err) callback(err, null)
+      qBuilder.resetParameters()
+      _params = []
       callback(null, JSON.parse(JSON.stringify(rows)))
     })
   }
@@ -147,15 +163,3 @@ exports.connectToDatabase = () => {
 exports.closeTheConnection = () => {
   connection.end()
 }
-
-// exports.setOptions({
-//   hostname: 'localhost',
-//   username: 'root',
-//   password: '',
-//   database: 'distribution'
-// })
-
-// exports.makeQuery().select('*').from('ads')
-// exports.prepare().getResult((err, data) => {
-//   console.log(data)
-// })
