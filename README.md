@@ -54,26 +54,52 @@ qBuilder.makeQuery()
  .whereNotIn('title', ['first', 'second', 'third', 'fourth'] // find all records which is NOT have value like one of the array elements
  .whereDate('createTime', 'some date format', '>', someDateTime) // find all records which create time is same like bigger from someDateTime
  .whereColumn('title', 'name', '=') // find all records where title and name is the same
-	
+
 // After we finish with the build the query is need to prepare and execute
 qBuilder.prepare() // Build the query from all simple parts
+ .setParameters([param1, param2, param3]) // Set all parameters which You need to used on mysql query builder
  .execute() // Just execute the query and no return result
 
 // OR
 qBuilder.prepare() // Build the query from all simple parts
+ .setParameters([param1, param2, param3]) // Set all parameters which You need to used on mysql query builder
  .getResult((err, data) => { // Get the result of executed query
   if (err) console.log(err)
   console.log(data) // data is result of mysql query
-  // The result 
-  // is in Object format like { title: 'SomeTitile' } 
+  // The result
+  // is in Object format like { title: 'SomeTitile' }
   // or in Array format like [ { title: 'firstTitle' }, { title: 'secondTitle' } ]
 })
+```
+
+```Javascript
+
+// If you don't trust of the developer then You have option to write query yourself like
+qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
+ .prepare()
+ .setParameters([param1]) // Set all parameters which You need to used on mysql query builder
+ .getResult((err, data) => {
+   if (err) console.log(err)
+   console.log(data) // data is result of mysql query
+   // The result
+   // is in Object format like { title: 'SomeTitile' }
+   // or in Array format like [ { title: 'firstTitle' }, { title: 'secondTitle' } ]
+ })
+
+// You can get and see the mysql query which is make with that function
+qBuilder.prepare() // But first need to run prepare function
+qBuilder.getCommand()
+```
+
+```Javascript
+// this will return mysql module pattern for more advanced functions
+qBuilder.getMysql()
 ```
 
 ## What You get from that module
 All common cases to use the `sql query clauses`
 ---
-* `SELECT` 
+* `SELECT`
 * * `SELECT ADD`
 * `INSERT`
 * `DELETE`
