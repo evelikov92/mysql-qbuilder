@@ -18,7 +18,9 @@ To add this npm package to your local machine, type the above into your command 
 ## How to used
 ```JavaScript
 const qBuilder = require('mysql-qbuilder')
+```
 
+```JavaScript
 // Set the parameters for mysql connection
 qBuilder.setOptions({
  hostname: 'localhost',
@@ -26,7 +28,9 @@ qBuilder.setOptions({
  password: '',
  database: 'distribution'
 })
+```
 
+```JavaScript
 // Start to make query
 qBuilder.makeQuery()
  .select('id, title, someDiff') // Select few columns used String or Array
@@ -72,8 +76,7 @@ qBuilder.prepare() // Build the query from all simple parts
 })
 ```
 
-```Javascript
-
+```JavaScript
 // If you don't trust of the developer then You have option to write query yourself like
 qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
  .prepare()
@@ -85,13 +88,15 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
    // is in Object format like { title: 'SomeTitile' }
    // or in Array format like [ { title: 'firstTitle' }, { title: 'secondTitle' } ]
  })
+```
 
+```JavaScript
 // You can get and see the mysql query which is make with that function
 qBuilder.prepare() // But first need to run prepare function
 qBuilder.getCommand()
 ```
 
-```Javascript
+```JavaScript
 // this will return mysql module pattern for more advanced functions
 qBuilder.getMysql()
 ```
