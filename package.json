@@ -1,6 +1,6 @@
 {
   "name": "mysql-qbuilder",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Query Builder for MySQL",
   "main": "index.js",
   "scripts": {
@@ -11,11 +11,11 @@
     "url": "git+https://github.com/evelikov92/mysql-qbuilder.git"
   },
   "engines": {
-    "node": ">= 0.6"
+    "node": ">= 6.10.1"
   },
   "author": {
     "name": "Evgeni Velikov",
-    "email": "evelikov92@gmail.com",
+    "email": "evelikov92@gmail.com"
   },
   "files": [
     "lib/",
