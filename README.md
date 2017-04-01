@@ -134,10 +134,12 @@ qBuilder.makeQuery()
   // Find all records where title and name is the same
   .whereColumn('title', 'name', '=')
 
+```
 
 
-// After we finish with the build the query is need to prepare and execute
+### After we finish with the build the query is need to prepare and execute
 
+```JavaScript
 // Build the query from all simple parts
 qBuilder.prepare()
 
@@ -146,11 +148,12 @@ qBuilder.prepare()
 
   // Just execute the query and no return result
   .execute()
+```
 
 
+### OR
 
-// OR
-
+```JavaScript
 // Build the query from all simple parts
 qBuilder.prepare()
 
@@ -160,10 +163,9 @@ qBuilder.prepare()
   // Get the result of executed query
   .getResult((err, data) => {
   if (err) console.log(err)
-  console.log(data) // data is result of mysql query
-  // The result
-  // is in Object format like { title: 'SomeTitile' }
-  // or in Array format like [ { title: 'firstTitle' }, { title: 'secondTitle' } ]
+
+  // data is result of mysql query and is return like array of objects or single object
+  console.log(data)
 })
 ```
 
@@ -180,21 +182,14 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
   // Get the result of executed query
   .getResult((err, data) => {
    if (err) console.log(err)
-   console.log(data) // data is result of mysql query
-   // The result
-   // is in Object format like { title: 'SomeTitile' }
-   // or in Array format like [ { title: 'firstTitle' }, { title: 'secondTitle' } ]
+
+   // data is result of mysql query and is return like array of objects or single object
+   console.log(data)
  })
 ```
 
 ```JavaScript
-// You can get and see the mysql query which is make with that function
-qBuilder.prepare() // But first need to run prepare function
-qBuilder.getCommand()
-```
-
-```JavaScript
-// this will return mysql module pattern for more advanced functions
+// For more advanced functions used that
 qBuilder.getMysql()
 ```
 
