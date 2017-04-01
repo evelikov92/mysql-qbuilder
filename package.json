@@ -10,7 +10,19 @@
     "type": "git",
     "url": "git+https://github.com/evelikov92/mysql-qbuilder.git"
   },
-  "author": "Evgeni Velikov",
+  "engines": {
+    "node": ">= 0.6"
+  },
+  "author": {
+    "name": "Evgeni Velikov",
+    "email": "evelikov92@gmail.com",
+  },
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md",
+    "index.js"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/evelikov92/mysql-qbuilder/issues"
