@@ -13,7 +13,7 @@ Query builder for MySQL working with NodeJS
 ```
 npm install mysql-qbuilder
 ```
-To add this npm package to your local machine, type the above into your command line. You’ll notice a node_modules directory appear in your root where the package is now installed.
+To add this npm package to your local machine, type the above into your command line. You�ll notice a node_modules directory appear in your root where the package is now installed.
 
 ## How to used
 ```JavaScript
@@ -33,41 +33,132 @@ qBuilder.setOptions({
 ```JavaScript
 // Start to make query
 qBuilder.makeQuery()
- .select('id, title, someDiff') // Select few columns used String or Array
- .addSelect(['count', 'name']) // Add few more columns used String or Array IS REQUIRED TO USED SELECT BEFORE USED ADDSELECT
- .add(['title', 'count', 'name']) // INSERT clause enter the columns which You set the values on new record
- .from('tableName') // Create from clause where you can used if you used select clause
- .table('tableName') // Set the table which You used for that query
- .delete() // delete some record from database IS REQUIRED TO USED FROM OR TABLE BEFORE USED DELETE
- .update(['title', 'count', 'name']) UPDATE that columns on the record
- .join('roles', 'roles.id = users.roleId' 'INNER') // the last parameter is optional Make join between two tables
- .take(500) // Get first 500 records from database
- .skip(500) // Skip first 500 records from database
- .top(500) // Get first 500 records from database IS REQUIRED TO USED SELECT BEFORE USED TOP
- .orderBy('count', true) // order by count column and set to be DESC (if is false then is not used DESC)
- .groupBy('count', false) // group by count column and don't set to be DESC
- .where('id', '>', 5) // find all records which id column is bigger from 5 second and third parameters are optional
- .andWhere('id') // find all records which and id is equal to some parameter IS REQUIRED TO USED WHERE BEFORE USED ANDWHERE
- .orWhere('count', '=', 10) // find all records which is by first where or count is equal to 10 IS REQUIRED TO USED WHERE BEFORE USED ANDWHERE
- .andOrWhere('count', '>', '<', [10, 30]) // find all records which and count bigger from 10 or smaller from 30
- .whereNull('title') // find all records which title is null
- .whreNotNull('title') // find all records which title is not null
- .whereBetween('count', [10, 30]) // find all records which the column 'count' is between 10 and 30
- .whereNotBetween('count', [10, 30]) // find all records which the column 'count' is not between 10 and 30
- .whereIn('count', [5, 10, 15, 20, 25]) // find all records which is have value like one of the array elements
- .whereNotIn('title', ['first', 'second', 'third', 'fourth'] // find all records which is NOT have value like one of the array elements
- .whereDate('createTime', 'some date format', '>', someDateTime) // find all records which create time is same like bigger from someDateTime
- .whereColumn('title', 'name', '=') // find all records where title and name is the same
+
+
+  // Select few columns used String or Array
+  .select('id, title, someDiff')
+
+
+  // Add few more columns used String or Array IS REQUIRED TO USED SELECT BEFORE USED ADDSELECT
+  .addSelect(['count', 'name'])
+
+
+  // INSERT clause enter the columns which You set the values on new record
+  .add(['title', 'count', 'name'])
+
+
+  // Create from clause where you can used if you used select clause
+  .from('tableName')
+
+
+  // Set the table which You used for that query
+  .table('tableName')
+
+
+  // delete some record from database IS REQUIRED TO USED FROM OR TABLE BEFORE USED DELETE
+  .delete()
+
+
+  // UPDATE that columns on the record
+  .update(['title', 'count', 'name'])
+
+
+  // The last parameter is optional Make join between two tables
+  .join('roles', 'roles.id = users.roleId' 'INNER')
+
+
+  // Get first 500 records from database
+  .take(500)
+
+
+  // Skip first 500 records from database
+  .skip(500)
+
+
+  // Get first 500 records from database IS REQUIRED TO USED SELECT BEFORE USED TOP
+  .top(500)
+
+
+  // Order by count column and set to be DESC (if is false then is not used DESC)
+  .orderBy('count', true)
+
+
+  // Group by count column and don't set to be DESC
+  .groupBy('count', false)
+
+
+  // Find all records which id column is bigger from 5 second and third parameters are optional
+  .where('id', '>', 5)
+
+
+  // Find all records which and id is equal to some parameter IS REQUIRED TO USED WHERE BEFORE USED ANDWHERE
+  .andWhere('id')
+
+
+  // find all records which is by first where or count is equal to 10 IS REQUIRED TO USED WHERE BEFORE USED ANDWHERE
+  .orWhere('count', '=', 10)
+
+
+  // Find all records which and count bigger from 10 or smaller from 30
+  .andOrWhere('count', '>', '<', [10, 30])
+
+
+  // Find all records which title is null
+  .whereNull('title')
+
+
+  // Find all records which title is not null
+  .whreNotNull('title')
+
+
+  // Find all records which the column 'count' is between 10 and 30
+  .whereBetween('count', [10, 30])
+
+
+  // Find all records which the column 'count' is not between 10 and 30
+  .whereNotBetween('count', [10, 30])
+
+
+  // Find all records which is have value like one of the array elements
+  .whereIn('count', [5, 10, 15, 20, 25])
+
+
+  // Find all records which is NOT have value like one of the array elements
+  .whereNotIn('title', ['first', 'second', 'third', 'fourth']
+
+
+  // Find all records which create time is same like bigger from someDateTime
+  .whereDate('createTime', 'some date format', '>', someDateTime)
+
+
+  // Find all records where title and name is the same
+  .whereColumn('title', 'name', '=')
+
+
 
 // After we finish with the build the query is need to prepare and execute
-qBuilder.prepare() // Build the query from all simple parts
- .setParameters([param1, param2, param3]) // Set all parameters which You need to used on mysql query builder
- .execute() // Just execute the query and no return result
+
+// Build the query from all simple parts
+qBuilder.prepare()
+
+  // Set all parameters which You need to used on mysql query builder
+  .setParameters([param1, param2, param3])
+
+  // Just execute the query and no return result
+  .execute()
+
+
 
 // OR
-qBuilder.prepare() // Build the query from all simple parts
- .setParameters([param1, param2, param3]) // Set all parameters which You need to used on mysql query builder
- .getResult((err, data) => { // Get the result of executed query
+
+// Build the query from all simple parts
+qBuilder.prepare()
+
+  // Set all parameters which You need to used on mysql query builder
+  .setParameters([param1, param2, param3])
+
+  // Get the result of executed query
+  .getResult((err, data) => {
   if (err) console.log(err)
   console.log(data) // data is result of mysql query
   // The result
@@ -79,9 +170,15 @@ qBuilder.prepare() // Build the query from all simple parts
 ```JavaScript
 // If you don't trust of the developer then You have option to write query yourself like
 qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
- .prepare()
- .setParameters([param1]) // Set all parameters which You need to used on mysql query builder
- .getResult((err, data) => {
+
+  // Build the query from all simple parts
+  .prepare()
+
+  // Set all parameters which You need to used on mysql query builder
+  .setParameters([param1])
+
+  // Get the result of executed query
+  .getResult((err, data) => {
    if (err) console.log(err)
    console.log(data) // data is result of mysql query
    // The result
@@ -104,9 +201,9 @@ qBuilder.getMysql()
 ## What You get from that module
 All common cases to use the `sql query clauses`
 ---
-* `SELECT`
+* `SELECT` V
 * * `SELECT ADD`
-* `INSERT`
+* `INSERT` V
 * `DELETE`
 * `UPDATE`
 * `ORDER BY`
@@ -114,7 +211,7 @@ All common cases to use the `sql query clauses`
 * `TOP`
 * `OFFSET`
 * `LIMIT`
-* `WHERE`
+* `WHERE` V
 * * `WHERE AND`
 * * `WHERE OR`
 * * `WHERE COLUMN`
@@ -127,8 +224,8 @@ All common cases to use the `sql query clauses`
 * * `WHERE NOT NULL`
 * * `WHERE AND OR`
 * `JOIN`
-* `FROM`
-* `TABLE`
+* `FROM` V
+* `TABLE` V
 
 # NOTE
 ## The clauses is still on testing mode
