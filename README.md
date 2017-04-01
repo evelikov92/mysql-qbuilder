@@ -153,6 +153,7 @@ qBuilder.prepare()
 
 ### OR
 
+
 ```JavaScript
 // Build the query from all simple parts
 qBuilder.prepare()
@@ -169,8 +170,10 @@ qBuilder.prepare()
 })
 ```
 
+
+### If you don't trust of the developer then You have option to write query yourself like
+
 ```JavaScript
-// If you don't trust of the developer then You have option to write query yourself like
 qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
 
   // Build the query from all simple parts
@@ -188,8 +191,10 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
  })
 ```
 
+
+### For more advanced functions used that
+
 ```JavaScript
-// For more advanced functions used that
 qBuilder.getMysql()
 ```
 
