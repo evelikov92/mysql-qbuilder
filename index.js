@@ -7,15 +7,6 @@ let _query = ''
 let _params = []
 
 /**
- * [Check do user is already connected]
- */
-function checkConnection () {
-  if (connection.state === 'disconnected') {
-    connection.connect()
-  }
-}
-
-/**
  * [setOptions description]
  * @param {[type]} dbSetting [description]
  */
@@ -51,6 +42,8 @@ exports.useSchema = (schema, table) => {
  * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
  */
 exports.makeQuery = () => {
+  qBuilder.resetParameters()
+  _params = []
   return qBuilder
 }
 
@@ -59,7 +52,6 @@ exports.makeQuery = () => {
  * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
  */
 exports.prepare = () => {
-  checkConnection()
   _query = qBuilder.prepare()
   return this
 }
@@ -112,14 +104,10 @@ exports.execute = function () {
 
     connection.query(_query, _params, (err, result) => {
       if (err) console.log(err)
-      qBuilder.resetParameters()
-      _params = []
     })
   } else {
     connection.query(_query, (err, result) => {
       if (err) console.log(err)
-      qBuilder.resetParameters()
-      _params = []
     })
   }
 
@@ -136,15 +124,11 @@ exports.getResult = (callback) => {
 
     connection.query(_query, _params, (err, rows, fields) => {
       if (err) callback(err, null)
-      qBuilder.resetParameters()
-      _params = []
       callback(null, JSON.parse(JSON.stringify(rows)))
     })
   } else {
     connection.query(_query, (err, rows, fields) => {
       if (err) callback(err, null)
-      qBuilder.resetParameters()
-      _params = []
       callback(null, JSON.parse(JSON.stringify(rows)))
     })
   }
@@ -154,7 +138,7 @@ exports.getResult = (callback) => {
  * [Connect to MySQL server]
  */
 exports.connectToDatabase = () => {
-  checkConnection()
+  connection.connect()
 }
 
 /**

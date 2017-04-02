@@ -75,11 +75,11 @@ qBuilder.connectToDatabase()
 qBuilder.makeQuery()
 ```
 
-## Select
+## Select `select()` `addSelect()`
 
-#### Some times You don't want to select all columns from database
-#### Then You need to enter just the columns.
-#### If You want just write *
+Some times You don't want to select all columns from database
+Then You need to enter just the columns.
+If You want just write *
 
 ```JavaScript
   qBuilder.makeQuery().select('id, title, count')
@@ -87,7 +87,9 @@ qBuilder.makeQuery()
   qBuilder.makeQuery().select('*')
 ```
 
-#### If You forget some column then You can add that columns with addSelect function
+If You forget some column then You can add that columns with addSelect function
+If You forget some column then You can add that columns with addSelect function
+
 ```JavaScript
   qBuilder.makeQuery()
     .select('id, title, count') // Oops I forgot the name column
@@ -100,8 +102,10 @@ qBuilder.makeQuery()
 ```
 
 
-## Insert
-#### Many times You don't want to get the data from database. Just want to add new record
+## Insert `add()`
+
+Many times You don't want to get the data from database. Just want to add new record
+
 ```JavaScript
   qBuilder.makeQuery()
     .table('tableName')
@@ -111,8 +115,228 @@ qBuilder.makeQuery()
     .execute() // Save the new record on database
 ```
 
-### Used one of that functions for create sql query
+
+## From, Table `from()` `table()`
+
+The from and table method is just set the table of query
+
 ```JavaScript
+  qBuilder.makeQuery()
+    .select('id, title, count') // Oops I forgot the name column
+    .from('tableName') // set Database table
+  qBuilder.prepare()
+    .getResult((err, data) => {
+      // data is the array of objects or just single object
+    })
+```
+
+
+## DELETE `delete()`
+
+The query builder may also be used to delete records from the table used delete function
+
+```JavaScript
+  qBuilder.makeQuery()
+    .table('tableName')
+    .delete()
+    .where('id', '=', 10)
+  qBuilder.prepare().execute()
+```
+
+## UPDATE `update()`
+
+Some times You don't want to select or add new columns or delete
+Some times is need just update the existing record in database. This is possible with update function
+
+```JavaScript
+  qBuilder.makeQuery()
+    .table('tableName')
+    .update(['title', 'count', 'name'])
+    .where('id', '=')
+    .setParameters(['newTitle', 25, 'newName'], 10) // The last parameter is for where clause
+  qBuilder.prepare().execute()  
+```
+
+## JOIN `join()`
+
+With Join is possible to get from database record from two tables with one query.
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('tableName.title, anotherTable.name')
+    .from('tableName') // set Database table
+    .join('anotherTable', 'tableName.anotherTableId = anotherTable.id', 'Inner')
+    .where('tableName.id' '>' 2)
+  qBuilder.prepare()
+    .getResult((err, data) => {
+      // data is the array of objects or just single object
+    })
+```
+
+
+## ORDER BY `orderBy()`
+Is A method which You can order by some column
+
+
+## GROUP BY `groupBy()`
+Is A method which You can group by some column
+
+
+## LIMIT `take()`
+Is A method which You can get only few records from database
+
+
+## OFFSET `skip()`
+Is A method which You can skip first few records from database
+
+
+## WHERE `where()`
+
+You may use the where method on a query builder instance to add where clauses to the query
+The first argument is column name
+The second argument is operator which You used (by default is =)
+The third argument is the value of column name on database
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .where('id', '=', 10)
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `andWhere()`
+
+Add another state and tell of the query to be both equal to true
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .where('id', '=', 10)
+    .andWhere('name', '=', 'Simon')
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `orWhere()`
+
+Add another state and tell of the query to be first or second or both equal to true
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .where('id', '=', 10)
+    .orWhere('name', '=', 'Simon')
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `andOrWhere()`
+
+The andOrWhere function is can used if You want first where which You call to be true
+and add another where which tell or to be first or second operator
+Like example is tell give me every record with name Simon and Id to be > or < of 35
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .where('name', '=', 'Simon')
+    .andOrWhere('id', '>', '<' 35)
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `whereNull()`
+Get all records which the column is null
+
+### `whereNotNull()`
+Get all records which the column is not null
+
+### `whereBetween()`
+
+Get all records which the column is between two values
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereBetween('id', [22, 300]) // Get all records between 22 and 300
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `whereNotBetween()`
+
+Get all records which the column is not between two values
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereNotBetween('id', [22, 300]) // Get all records which is not between 22 and 300
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `whereIn`
+
+Get all records which the column value is equal to some parameters which is set
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereIn('id', [2, 4, 6, 3, 8]) // Get all records with id 2, 3, 4, 6, 8
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `whereNotIn`
+
+Get all records which the column value is not equal to some parameters which is set
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereNotIn('id', [2, 4, 6, 3, 8]) // Get all records which the id is not 2, 3, 4, 6, 8
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `whereColumn`
+
+Get all records which the first column and second column has same values on database
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereColumn('title', 'name', '=') // Get all records which the title and name is same
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+## Used one of that functions for create sql query
+```JavaScript
+
+  // Select few columns used String or Array
+  .select('id, title, someDiff')
+
+
+  // Add few more columns used String or Array IS REQUIRED TO USED SELECT BEFORE USED ADDSELECT
+  .addSelect(['count', 'name'])
 
 
   // INSERT clause enter the columns which You set the values on new record
