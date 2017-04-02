@@ -1,21 +1,19 @@
 # mysql-qbuilder
+The mysql-qbuilder for NodeJS
 
-That is module for create queries simple and easy with only few rows.
-
-Query builder for MySQL working with NodeJS
-
-## What You can do with that package
----
-* Write faster and to not care abot syntax about the sql queries
-* Write Your own sql queries and send to module for execution
-
-## How to install
 ```
-npm install mysql-qbuilder
+npm install mysql-qbuilder --save --save-exat
 ```
 
 To add this npm package to your local machine, type the above into your command line. You will notice a node_modules directory appear in your root where the package is now installed.
 
+## Introduction
+---
+mysql-qbuilder is NodeJS module provides a convenient, fluent interface to creating and running database queries.
+It can be used to perform most database operations in your application.
+
+mysql-qbuilder query builder uses mysql module to protect your application against SQL injection attacks.
+There is no need to clean strings being passed as bindings.
 
 ## What You get from that module
 All common cases to use the `sql query clauses`
