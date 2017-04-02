@@ -1,14 +1,10 @@
 # mysql-qbuilder
 
-[![npm version](https://badge.fury.io/js/mysql-qbuilder.svg)](https://badge.fury.io/js/mysql-qbuilder)
-[![GitHub version](https://badge.fury.io/gh/mysql-qbuilder.svg)](http://badge.fury.io/gh/mysql-qbuilder)
 [![Build Status](https://semaphoreapp.com/api/v1/projects/d4cca506-99be-44d2-b19e-176f36ec8cf1/128505/shields_badge.svg)](https://semaphoreapp.com/boennemann/badges)
-[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+[![npm](https://img.shields.io/npm/l/express.svg)]()
 
 [![npm](https://img.shields.io/npm/v/mysql-qbuilder.svg)]()
 [![node](https://img.shields.io/node/v/mysql-qbuilder.svg)]()
-
-[![GitHub stars](https://img.shields.io/github/stars/badges/mysql-qbuilder.svg?style=social&label=Star)]()
 
 [![npm](https://img.shields.io/npm/dm/mysql-qbuilder.svg)]()
 [![npm](https://img.shields.io/npm/dt/mysql-qbuilder.svg)]()
