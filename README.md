@@ -5,6 +5,14 @@
 [![Build Status](https://semaphoreapp.com/api/v1/projects/d4cca506-99be-44d2-b19e-176f36ec8cf1/128505/shields_badge.svg)](https://semaphoreapp.com/boennemann/badges)
 [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
+[![npm](https://img.shields.io/npm/v/mysql-qbuilder.svg)]()
+[![node](https://img.shields.io/node/v/mysql-qbuilder.svg)]()
+
+[![GitHub stars](https://img.shields.io/github/stars/badges/mysql-qbuilder.svg?style=social&label=Star)]()
+
+[![npm](https://img.shields.io/npm/dm/mysql-qbuilder.svg)]()
+[![npm](https://img.shields.io/npm/dt/mysql-qbuilder.svg)]()
+
 The mysql-qbuilder for NodeJS
 ```
 npm install mysql-qbuilder --save --save-exat
