@@ -27,7 +27,6 @@ All common cases to use the `sql query clauses`
 * `UPDATE`
 * `ORDER BY`
 * `GROUP BY`
-* `TOP`
 * `OFFSET`
 * `LIMIT`
 * `WHERE`
@@ -58,11 +57,16 @@ const qBuilder = require('mysql-qbuilder')
 ### Set the parameters for mysql connection
 ```JavaScript
 qBuilder.setOptions({
- hostname: 'localhost',
- username: 'root',
- password: '',
- database: 'distribution'
+ hostname: 'hostName',
+ username: 'userName',
+ password: 'passWord',
+ database: 'databaseName'
 })
+```
+
+### Then connecto to database
+```JavaScript
+qBuilder.connectToDatabase()
 ```
 
 
@@ -71,15 +75,44 @@ qBuilder.setOptions({
 qBuilder.makeQuery()
 ```
 
+## Select
+
+#### Some times You don't want to select all columns from database
+#### Then You need to enter just the columns.
+#### If You want just write *
+
+```JavaScript
+  qBuilder.makeQuery().select('id, title, count')
+  qBuilder.makeQuery().select(['id', 'title', 'count'])
+  qBuilder.makeQuery().select('*')
+```
+
+#### If You forget some column then You can add that columns with addSelect function
+```JavaScript
+  qBuilder.makeQuery()
+    .select('id, title, count') // Oops I forgot the name column
+    .addSelect('name') // Alright I added now
+    .from('tableName') // set Database table
+  qBuilder.prepare()
+    .getResult((err, data) => {
+      // data is the array of objects or just single object
+    })
+```
+
+
+## Insert
+#### Many times You don't want to get the data from database. Just want to add new record
+```JavaScript
+  qBuilder.makeQuery()
+    .table('tableName')
+    .add(['count', 'title', 'name']) // set the column name on database
+  qBuilder.prepare()
+    .setParameters([5, 'SomeTitle', 'SomeName']) // set the values of new record
+    .execute() // Save the new record on database
+```
 
 ### Used one of that functions for create sql query
 ```JavaScript
-  // Select few columns used String or Array
-  .select('id, title, someDiff')
-
-
-  // Add few more columns used String or Array IS REQUIRED TO USED SELECT BEFORE USED ADDSELECT
-  .addSelect(['count', 'name'])
 
 
   // INSERT clause enter the columns which You set the values on new record
@@ -111,11 +144,8 @@ qBuilder.makeQuery()
 
 
   // Skip first 500 records from database
+  // The OFFSET is working together with LIMIT so first used take function!
   .skip(500)
-
-
-  // Get first 500 records from database IS REQUIRED TO USED SELECT BEFORE USED TOP
-  .top(500)
 
 
   // Order by count column and set to be DESC (if is false then is not used DESC)
@@ -230,13 +260,8 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
 ```
 
 
-### For more mysql advanced functions used that
+### For more mysql advanced functions You can used that which return the mysql module
 
 ```JavaScript
 qBuilder.getMysql()
 ```
-
-
-
-# NOTE
-## The clauses is still on testing mode
