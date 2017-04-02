@@ -1,5 +1,4 @@
 # mysql-qbuilder
-The mysql-qbuilder for NodeJS
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
@@ -7,6 +6,8 @@ The mysql-qbuilder for NodeJS
 [![Linux Build][travis-image]][travis-url]
 [![Windows Build][appveyor-image]][appveyor-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
+
+The mysql-qbuilder for NodeJS
 
 ```
 npm install mysql-qbuilder --save --save-exat
