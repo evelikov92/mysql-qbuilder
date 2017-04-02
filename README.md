@@ -1,7 +1,11 @@
 # mysql-qbuilder
 
-The mysql-qbuilder for NodeJS
+[![npm version](https://badge.fury.io/js/mysql-qbuilder.svg)](https://badge.fury.io/js/mysql-qbuilder)
+[![GitHub version](https://badge.fury.io/gh/mysql-qbuilder.svg)](http://badge.fury.io/gh/mysql-qbuilder)
+[![Build Status](https://semaphoreapp.com/api/v1/projects/d4cca506-99be-44d2-b19e-176f36ec8cf1/128505/shields_badge.svg)](https://semaphoreapp.com/boennemann/badges)
+[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
+The mysql-qbuilder for NodeJS
 ```
 npm install mysql-qbuilder --save --save-exat
 ```
