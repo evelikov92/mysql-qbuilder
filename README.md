@@ -158,8 +158,9 @@ Some times is need just update the existing record in database. This is possible
     .table('tableName')
     .update(['title', 'count', 'name'])
     .where('id', '=')
+  qBuilder.prepare()
     .setParameters(['newTitle', 25, 'newName'], 10) // The last parameter is for where clause
-  qBuilder.prepare().execute()  
+    .execute()  
 ```
 
 ## JOIN `join()`
