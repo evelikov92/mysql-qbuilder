@@ -7,7 +7,7 @@
 [![npm](https://img.shields.io/npm/dm/mysql-qbuilder.svg)]()
 [![npm](https://img.shields.io/npm/dt/mysql-qbuilder.svg)]()
 
-The mysql-qbuilder for NodeJS
+SQL Query builder working with NodeJS
 ```
 npm install mysql-qbuilder --save --save-exat
 ```
