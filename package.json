@@ -1,6 +1,6 @@
 {
   "name": "mysql-qbuilder",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "Query Builder for MySQL",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,15 @@
     "LICENSE",
     "README.md",
     "index.js"
+  ],
+  "keywords": [
+    "query",
+    "query-builder",
+    "sql",
+    "mysql",
+    "builder",
+    "mysql-query-builder",
+    "mysql-qbuilder"
   ],
   "license": "MIT",
   "bugs": {
