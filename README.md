@@ -6,6 +6,7 @@
 [![npm](https://img.shields.io/npm/l/mysql-qbuilder.svg)]()
 [![npm](https://img.shields.io/npm/dm/mysql-qbuilder.svg)]()
 [![npm](https://img.shields.io/npm/dt/mysql-qbuilder.svg)]()
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 SQL Query builder working with NodeJS
 ```
