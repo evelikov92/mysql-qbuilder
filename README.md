@@ -41,10 +41,10 @@ All common cases to use the `sql query clauses`
 * * `WHERE AND OR`
 * * `WHERE NOT`
 * * `WHERE COLUMN`
-* * `WHERE DATE`
-* * `WHERE YEAR`
-* * `WHERE MONTH`
-* * `WHERE DAY`
+* * `WHERE DATE` ++
+* * `WHERE YEAR` ++
+* * `WHERE MONTH` ++
+* * `WHERE DAY` ++
 * * `WHERE IN`
 * * `WHERE NOT IN`
 * * `WHERE BETWEEN`
