@@ -6,7 +6,6 @@
 [![npm](https://img.shields.io/npm/l/mysql-qbuilder.svg)]()
 [![npm](https://img.shields.io/npm/dm/mysql-qbuilder.svg)]()
 [![npm](https://img.shields.io/npm/dt/mysql-qbuilder.svg)]()
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
 SQL Query builder working with NodeJS
 ```
@@ -38,15 +37,19 @@ All common cases to use the `sql query clauses`
 * `WHERE`
 * * `WHERE AND`
 * * `WHERE OR`
+* * `WHERE AND OR`
+* * `WHERE NOT`
 * * `WHERE COLUMN`
 * * `WHERE DATE`
-* * `WHERE NOT IN`
+* * `WHERE YEAR`
+* * `WHERE MONTH`
+* * `WHERE DAY`
 * * `WHERE IN`
+* * `WHERE NOT IN`
 * * `WHERE BETWEEN`
 * * `WHERE NOT BETWEEN`
 * * `WHERE NULL`
 * * `WHERE NOT NULL`
-* * `WHERE AND OR`
 * `JOIN`
 * `FROM`
 * `TABLE`
@@ -182,20 +185,73 @@ With Join is possible to get from database record from two tables with one query
 
 
 ## ORDER BY `orderBy()`
+
 Is A method which You can order by some column
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('title, count, name')
+    .from('tableName') // set Database table
+    .where('id' '>' 2)
+    .orderBy('name', true) // Then is to be sorted in DESC
+  qBuilder.prepare()
+    .getResult((err, data) => {
+      // data is the array of objects or just single object
+  })
+```
 
 
 ## GROUP BY `groupBy()`
+
 Is A method which You can group by some column
 
+```JavaScript
+  qBuilder.makeQuery()
+    .select('title, count, name')
+    .from('tableName') // set Database table
+    .where('id' '>' 2)
+    .groupBy('name')
+  qBuilder.prepare()
+    .getResult((err, data) => {
+      // data is the array of objects or just single object
+  })
+```
 
 ## LIMIT `take()`
+
 Is A method which You can get only few records from database
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('title, count, name')
+    .from('tableName') // set Database table
+    .where('id' '>' 2)
+    .take(500) // Get first 500 results
+  qBuilder.prepare()
+    .getResult((err, data) => {
+      // data is the array of objects or just single object
+  })
+```
 
 
 ## OFFSET `skip()`
+
 Is A method which You can skip first few records from database
 
+```JavaScript
+  qBuilder.makeQuery()
+    .select('title, count, name')
+    .from('tableName') // set Database table
+    .where('id' '>' 2)
+    .take(500) // Get results from 201 to 701
+    .skip(200) // Skip the first 200 results
+  qBuilder.prepare()
+    .getResult((err, data) => {
+      // data is the array of objects or just single object
+  })
+```
+
+## NOTICE `From Previous version and that version the some secondary where clauses have one more extra (optional) parameter (andOr), where can set AND or OR. On previous version was AND and now default value is AND`
 
 ## WHERE `where()`
 
@@ -209,6 +265,21 @@ The third argument is the value of column name on database
     .select('*')
     .from('tableName')
     .where('id', '=', 10)
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `WhereNot()`
+
+Where clause is is check do condition is not true
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereNot('id', '=', 10, 'OR') // Get all Elements where id is not equal to 10
+    .andWhere('name', '=', 'Simon')
   qBuilder.prepare().getResult((err, data) => {
 
   })
@@ -260,10 +331,32 @@ Like example is tell give me every record with name Simon and Id to be > or < of
 ```
 
 ### `whereNull()`
+
 Get all records which the column is null
 
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereNull('name') // get all records which the column name is null
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
 ### `whereNotNull()`
+
 Get all records which the column is not null
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereNotNull('name') // get all records which the column name is NOT null
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
 
 ### `whereBetween()`
 
@@ -273,7 +366,7 @@ Get all records which the column is between two values
   qBuilder.makeQuery()
     .select('*')
     .from('tableName')
-    .whereBetween('id', [22, 300]) // Get all records between 22 and 300
+    .whereBetween('id', [22, 300], 'OR') // Get all records between 22 and 300
   qBuilder.prepare().getResult((err, data) => {
 
   })
@@ -287,7 +380,7 @@ Get all records which the column is not between two values
   qBuilder.makeQuery()
     .select('*')
     .from('tableName')
-    .whereNotBetween('id', [22, 300]) // Get all records which is not between 22 and 300
+    .whereNotBetween('id', [22, 300], 'AND') // Get all records which is not between 22 and 300
   qBuilder.prepare().getResult((err, data) => {
 
   })
@@ -301,7 +394,7 @@ Get all records which the column value is equal to some parameters which is set
   qBuilder.makeQuery()
     .select('*')
     .from('tableName')
-    .whereIn('id', [2, 4, 6, 3, 8]) // Get all records with id 2, 3, 4, 6, 8
+    .whereIn('id', [2, 4, 6, 3, 8], 'AND') // Get all records with id 2, 3, 4, 6, 8
   qBuilder.prepare().getResult((err, data) => {
 
   })
@@ -315,7 +408,7 @@ Get all records which the column value is not equal to some parameters which is 
   qBuilder.makeQuery()
     .select('*')
     .from('tableName')
-    .whereNotIn('id', [2, 4, 6, 3, 8]) // Get all records which the id is not 2, 3, 4, 6, 8
+    .whereNotIn('id', [2, 4, 6, 3, 8], 'OR') // Get all records which the id is not 2, 3, 4, 6, 8
   qBuilder.prepare().getResult((err, data) => {
 
   })
@@ -329,11 +422,68 @@ Get all records which the first column and second column has same values on data
   qBuilder.makeQuery()
     .select('*')
     .from('tableName')
-    .whereColumn('title', 'name', '=') // Get all records which the title and name is same
+    .whereColumn('title', 'name', '=', 'OR') // Get all records which the title and name is same
   qBuilder.prepare().getResult((err, data) => {
 
   })
 ```
+
+### `whereDate`
+
+Get all records where the column createTime is equal to 2010-04-01 Date Time
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereDate('createTime', '=', '2010-04-01')
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `whereYear`
+
+Get all records where the column createTime is from 2010
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereYear('createTime', '=', '2010', 'OR')
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `whereMonth`
+
+Get all records where the column createTime is with month equal to 10
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereMonth('createTime', '=', '10', 'OR')
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
+### `whereDay`
+
+Get all records where the column createTime is with day equal to 22
+
+```JavaScript
+  qBuilder.makeQuery()
+    .select('*')
+    .from('tableName')
+    .whereDay('createTime', '=', '22', 'OR')
+  qBuilder.prepare().getResult((err, data) => {
+
+  })
+```
+
 
 ## Used one of that functions for create sql query
 ```JavaScript
@@ -391,6 +541,10 @@ Get all records which the first column and second column has same values on data
   .where('id', '>', 5)
 
 
+  // Find all records which the id column is not equal to 5
+  .whereNot('id', '=', 5)
+
+
   // Find all records which and id is equal to some parameter IS REQUIRED TO USED WHERE BEFORE USED ANDWHERE
   .andWhere('id')
 
@@ -404,35 +558,58 @@ Get all records which the first column and second column has same values on data
 
 
   // Find all records which title is null
-  .whereNull('title')
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereNull('title', 'OR')
 
 
   // Find all records which title is not null
-  .whreNotNull('title')
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whreNotNull('title', 'AND')
 
 
   // Find all records which the column 'count' is between 10 and 30
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
   .whereBetween('count', [10, 30])
 
 
   // Find all records which the column 'count' is not between 10 and 30
-  .whereNotBetween('count', [10, 30])
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereNotBetween('count', [10, 30], 'OR')
 
 
   // Find all records which is have value like one of the array elements
-  .whereIn('count', [5, 10, 15, 20, 25])
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereIn('count', [5, 10, 15, 20, 25], 'AND')
 
 
   // Find all records which is NOT have value like one of the array elements
-  .whereNotIn('title', ['first', 'second', 'third', 'fourth']
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereNotIn('title', ['first', 'second', 'third', 'fourth'], 'AND')
 
 
-  // Find all records which create time is same like bigger from someDateTime
-  .whereDate('createTime', 'some date format', '>', someDateTime)
+  // Find all records which create time is bigger from  2010-04-01
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereDate('createTime', '>', '2010-04-01', 'OR')
+
+
+  // Find all records which createTime is have with Day = 22
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereDay('createTime', '=', 22, 'AND')
+
+
+  // Find all records which createTime is have with Month = 10
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereMonth('createTime', '=', 10, 'OR')
+
+
+  // Find all records which createTime is have with Year = 2010
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereYear('createTime', '=', 2010, 'OR')
 
 
   // Find all records where title and name is the same
-  .whereColumn('title', 'name', '=')
+  // If before You call the some another where method then is possible to choose between AND and OR (Default = AND)
+  .whereColumn('title', 'name', '=', 'OR')
 ```
 
 
@@ -462,10 +639,10 @@ qBuilder.prepare()
 
   // Get the result of executed query
   .getResult((err, data) => {
-  if (err) console.log(err)
+    if (err) console.log(err)
 
-  // data is result of mysql query and is return like array of objects or single object
-  console.log(data)
+    // data is result of mysql query and is return like array of objects or single object
+    console.log(data)
 })
 ```
 
@@ -483,10 +660,10 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
 
   // Get the result of executed query
   .getResult((err, data) => {
-   if (err) console.log(err)
+    if (err) console.log(err)
 
-   // data is result of mysql query and is return like array of objects or single object
-   console.log(data)
+    // data is result of mysql query and is return like array of objects or single object
+    console.log(data)
  })
 ```
 
@@ -496,3 +673,8 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
 ```JavaScript
 qBuilder.getMysql()
 ```
+
+## Change log
+* v1.2.1
+* * Add `WhereDay` `WhereMonth` `WhereYear`
+* * Add One more (Optional) Parameter on Where methods which is possible choose between AND or OR (Default = AND)
