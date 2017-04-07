@@ -702,9 +702,9 @@ From v1.3.1 Is possible to used mysql-qbuilder much easier for some common cases
 * Find element by Id
 * Find elements by few columns from table
 
-### IMPORTANT: For to Used Helper Queries is not need to start with `makeQuery()`
-### Is need to start with `useScheme('tableName')`
-### If You want to used same table from database then is not need anymore to set table only used `useScheme()`
+### IMPORTANT:
+For to Used Helper Queries is not need to start with `makeQuery()` Is need to start with `useScheme('tableName')`
+If You want to used same table from database then is not need anymore to set table only used `useScheme()`
 
 
 ## Add
