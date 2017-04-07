@@ -110,6 +110,7 @@ qBuilder.connectToDatabase()
 qBuilder.makeQuery()
 ```
 
+#EXAMPLES
 
 ## SELECT
 ### `select()` `addSelect()`
