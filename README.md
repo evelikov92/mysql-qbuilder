@@ -27,7 +27,7 @@
 - [WHERE](#where)
 - [All Query Builder Functions](#query-builder)
 - [How to Execute](#how-to-execute)
-- [Helper Queries](#helper-queries)
+- [Query Model](#query-model)
 - [Add](#add)
 - [Get First](#get-first)
 - [Get Last](#get-last)
@@ -693,7 +693,7 @@ qBuilder.prepare()
 ```
 
 
-## Helper Queries
+## Query Model
 From v1.3.1 Is possible to used mysql-qbuilder much easier for some common cases like
 * Add some record on database
 * Get first element from table
