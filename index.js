@@ -1,7 +1,7 @@
 const mysql = require('mysql')
 const queryBuilder = require('./lib/QueryBuilder')
-const dbBuilder = require('./lib/DatabaseBuilder')
-const qModel = require('./lib/ModelBinding')
+// const dbBuilder = require('./lib/DatabaseBuilder')
+const queryModel = require('./lib/QueryModel')
 const parameters = require('./lib/Parameters')
 
 let connection = null
@@ -41,22 +41,22 @@ exports.closeTheConnection = () => {
   connection.end()
 }
 
-/**
- * [Start to change the Database strcture]
- * @return {DatabaseBuilder} [Database Builder Creator for modify the structure of Table on database]
- */
-exports.setDatabaseStructure = () => {
-  return dbBuilder
-}
+// /**
+//  * [Start to change the Database strcture]
+//  * @return {DatabaseBuilder} [Database Builder Creator for modify the structure of Table on database]
+//  */
+// exports.setDatabaseStructure = () => {
+//   return dbBuilder
+// }
 
 /**
  * [Make table scheme and use some common methods]
- * @param  {Array} schema [List of columns on table which You want to used for current case]
- * @param {String} table   [Database table for that schema]
- * @return {ModelBinding}  [description]
+ * @param {String} [table='']   [Database table for that schema]
+ * @return {ModelBinding}       [description]
  */
-exports.useScheme = (schema, table) => {
-  return qModel.setSchema(schema, table)
+exports.useScheme = function (table = '') {
+  parameters.params = []
+  return queryModel.setTable(table)
 }
 
 /**
@@ -120,31 +120,7 @@ exports.getCommand = () => {
  * @return {QueryBuilder} [Query Builder Creator of sql queries and connect to database]
  */
 exports.prepare = function () {
-  if (parameters.option === 'select') {
-    parameters.command = parameters.select + parameters.from +
-      parameters.join + parameters.groupBy + parameters.where +
-      parameters.orderBy + parameters.limit + parameters.skip
-  } else if (parameters.option === 'insert') {
-    parameters.command = parameters.insert
-  } else if (parameters.option === 'update') {
-    parameters.command = parameters.update + parameters.where + parameters.limit + parameters.skip
-  } else if (parameters.option === 'delete') {
-    parameters.command = parameters.delete + parameters.where + parameters.limit + parameters.skip
-  } else {
-    parameters.command = parameters.where + parameters.limit + parameters.skip
-  }
-
-  parameters.select = ''
-  parameters.from = ''
-  parameters.join = ''
-  parameters.where = ''
-  parameters.groupBy = ''
-  parameters.orderBy = ''
-  parameters.limit = ''
-  parameters.skip = ''
-  parameters.insert = ''
-  parameters.update = ''
-  parameters.delete = ''
+  parameters.prepare()
 
   return this
 }
