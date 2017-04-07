@@ -14,7 +14,22 @@
 - [Introduction](#introduction)
 - [Clauses](#clauses)
 - [Examples](#examples)
-- [Select clauses](#select-clauses)
+- [SELECT](#select)
+- [INSERT](#insert)
+- [FROM Table](#from-table)
+- [DELETE](#delete)
+- [UPDATE](#update)
+- [JOIN](#join)
+- [ORDER BY](#order-by)
+- [GROUP BY](#group-by)
+- [LIMIT](#limit)
+- [OFFSET](#offset)
+- [WHERE](#where)
+- [All Query Builder Functions](#query-builder)
+- [How to Execute](#how-to-execute)
+- [How to write Your own Query](#how-to-write-own-query)
+- [Get Mysql Module](#get-mysql-module)
+- [Change log](#change-log)
 
 ## Install
 
@@ -95,7 +110,7 @@ qBuilder.connectToDatabase()
 qBuilder.makeQuery()
 ```
 
-## Select clauses
+## SELECT
 ### `select()` `addSelect()`
 
 Some times You don't want to select all columns from database
@@ -123,7 +138,8 @@ If You forget some column then You can add that columns with addSelect function
 ```
 
 
-## Insert `add()`
+## INSERT
+### `add()`
 
 Many times You don't want to get the data from database. Just want to add new record
 
@@ -137,7 +153,8 @@ Many times You don't want to get the data from database. Just want to add new re
 ```
 
 
-## From, Table `from()` `table()`
+## FROM Table
+### `from()` `table()`
 
 The from and table method is just set the table of query
 
@@ -152,7 +169,8 @@ The from and table method is just set the table of query
 ```
 
 
-## DELETE `delete()`
+## DELETE
+### `delete()`
 
 The query builder may also be used to delete records from the table used delete function
 
@@ -164,7 +182,8 @@ The query builder may also be used to delete records from the table used delete 
   qBuilder.prepare().execute()
 ```
 
-## UPDATE `update()`
+## UPDATE
+### `update()`
 
 Some times You don't want to select or add new columns or delete
 Some times is need just update the existing record in database. This is possible with update function
@@ -179,7 +198,8 @@ Some times is need just update the existing record in database. This is possible
     .execute()  
 ```
 
-## JOIN `join()`
+## JOIN
+### `join()`
 
 With Join is possible to get from database record from two tables with one query.
 
@@ -196,7 +216,8 @@ With Join is possible to get from database record from two tables with one query
 ```
 
 
-## ORDER BY `orderBy()`
+## ORDER BY
+### `orderBy()`
 
 Is A method which You can order by some column
 
@@ -213,7 +234,8 @@ Is A method which You can order by some column
 ```
 
 
-## GROUP BY `groupBy()`
+## GROUP BY
+### `groupBy()`
 
 Is A method which You can group by some column
 
@@ -229,7 +251,8 @@ Is A method which You can group by some column
   })
 ```
 
-## LIMIT `take()`
+## LIMIT
+### `take()`
 
 Is A method which You can get only few records from database
 
@@ -246,7 +269,8 @@ Is A method which You can get only few records from database
 ```
 
 
-## OFFSET `skip()`
+## OFFSET
+### `skip()`
 
 Is A method which You can skip first few records from database
 
@@ -265,7 +289,8 @@ Is A method which You can skip first few records from database
 
 ## NOTICE `From Previous version and that version the some secondary where clauses have one more extra (optional) parameter (andOr), where can set AND or OR. On previous version was AND and now default value is AND`
 
-## WHERE `where()`
+## WHERE
+### `where()`
 
 You may use the where method on a query builder instance to add where clauses to the query
 The first argument is column name
@@ -497,7 +522,7 @@ Get all records where the column createTime is with day equal to 22
 ```
 
 
-## Used one of that functions for create sql query
+## All Query Builder Functions
 ```JavaScript
 
   // Select few columns used String or Array
@@ -625,62 +650,62 @@ Get all records where the column createTime is with day equal to 22
 ```
 
 
-### After we finish with the build the query is need to prepare and execute
+## How to Execute
+### Is have two different ways to execute the created query
+
+#### 1) With execute which not return result
+Is possible to used when You want to add new record on database
 
 ```JavaScript
 // Build the query from all simple parts
 qBuilder.prepare()
-
   // Set all parameters which You need to used on mysql query builder
   .setParameters([param1, param2, param3])
-
-  // Just execute the query and no return result
+  // Just execute the query and don't return some result
   .execute()
 ```
 
-
-### OR
-
+#### 2) With getResult which return result
+Is possible to used when You want to get some records from database
 
 ```JavaScript
 // Build the query from all simple parts
 qBuilder.prepare()
-
   // Set all parameters which You need to used on mysql query builder
   .setParameters([param1, param2, param3])
-
   // Get the result of executed query
-  .getResult((err, data) => {
-    if (err) console.log(err)
-
-    // data is result of mysql query and is return like array of objects or single object
-    console.log(data)
-})
+  .getResult((err, data) => { // is return the Array
+    if (err) {
+      console.log(err)
+    } else {
+      // make something with data which is result of mysql query execution
+    }
+  })
 ```
 
 
-### If You don't trust of the developer then You have option to write Your own query
+## How to write Your own Query
+### To write Your own query is need only to call method setCommand
 
 ```JavaScript
 qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
-
   // Build the query from all simple parts
   .prepare()
-
   // Set all parameters which You need to used on mysql query builder
   .setParameters([param1])
-
   // Get the result of executed query
-  .getResult((err, data) => {
-    if (err) console.log(err)
-
-    // data is result of mysql query and is return like array of objects or single object
-    console.log(data)
+  .getResult((err, data) => { // is return the Array
+    if (err) {
+      console.log(err)
+    } else {
+      // make something with data which is result of mysql query execution
+    }
  })
 ```
 
 
-### For more mysql advanced functions You can used that which return the mysql module
+## Get Mysql Module
+### If You want to set more advanced options then You can get the MySql module
 
 ```JavaScript
 qBuilder.getMysql()
