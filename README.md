@@ -842,12 +842,12 @@ qBuilder.getMysql()
 ## Change log
 * v1.3.1
 * * Add Helper Query functions with for some common cases like:
-* * `add` Add record on database
-* * `getFirst` Get first element from table
-* * `getLast` Get last element from table
-* * `getAll` Get all elements from table
-* * `findById` Find record from table by id
-* * `findByFields` Find records from table by selected few columns
+* * * `add` Add record on database
+* * * `getFirst` Get first element from table
+* * * `getLast` Get last element from table
+* * * `getAll` Get all elements from table
+* * * `findById` Find record from table by id
+* * * `findByFields` Find records from table by selected few columns
 * v1.2.0
 * * Add `WhereDay` `WhereMonth` `WhereYear`
 * * Add One more (Optional) Parameter on Where methods which is possible choose between AND or OR (Default = AND)
