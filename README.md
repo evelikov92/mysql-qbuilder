@@ -27,6 +27,13 @@
 - [WHERE](#where)
 - [All Query Builder Functions](#query-builder)
 - [How to Execute](#how-to-execute)
+- [Helper Queries](#helper-queries)
+- [Add](#add)
+- [Get First](#get-first)
+- [Get Last](#get-last)
+- [Get All](#get-all)
+- [Find by Id](#find-by-id)
+- [Find by Fields](#find-by-fields)
 - [How to write Your own Query](#how-to-write-own-query)
 - [Get Mysql Module](#get-mysql-module)
 - [Change log](#change-log)
@@ -97,10 +104,10 @@ All common cases to use the `sql query clauses`
 * * `WHERE AND OR`
 * * `WHERE NOT`
 * * `WHERE COLUMN`
-* * `WHERE DATE` ++
-* * `WHERE YEAR` ++
-* * `WHERE MONTH` ++
-* * `WHERE DAY` ++
+* * `WHERE DATE`
+* * `WHERE YEAR`
+* * `WHERE MONTH`
+* * `WHERE DAY`
 * * `WHERE IN`
 * * `WHERE NOT IN`
 * * `WHERE BETWEEN`
@@ -213,7 +220,7 @@ With Join is possible to get from database record from two tables with one query
     .where('tableName.id' '>' 2)
   qBuilder.prepare()
     .getResult((err, data) => {
-      // data is the array of objects or just single object
+      // data is the array of objects
     })
 ```
 
@@ -249,7 +256,7 @@ Is A method which You can group by some column
     .groupBy('name')
   qBuilder.prepare()
     .getResult((err, data) => {
-      // data is the array of objects or just single object
+      // data is the array of objects
   })
 ```
 
@@ -266,7 +273,7 @@ Is A method which You can get only few records from database
     .take(500) // Get first 500 results
   qBuilder.prepare()
     .getResult((err, data) => {
-      // data is the array of objects or just single object
+      // data is the array of objects
   })
 ```
 
@@ -285,7 +292,7 @@ Is A method which You can skip first few records from database
     .skip(200) // Skip the first 200 results
   qBuilder.prepare()
     .getResult((err, data) => {
-      // data is the array of objects or just single object
+      // data is the array of objects
   })
 ```
 
@@ -305,7 +312,7 @@ The third argument is the value of column name on database
     .from('tableName')
     .where('id', '=', 10)
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -320,7 +327,7 @@ Where clause is is check do condition is not true
     .whereNot('id', '=', 10, 'OR') // Get all Elements where id is not equal to 10
     .andWhere('name', '=', 'Simon')
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -334,7 +341,7 @@ Add another state and tell of the query to be both equal to true
     .where('id', '=', 10)
     .andWhere('name', '=', 'Simon')
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -348,7 +355,7 @@ Add another state and tell of the query to be first or second or both equal to t
     .where('id', '=', 10)
     .orWhere('name', '=', 'Simon')
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -365,7 +372,7 @@ Like example is tell give me every record with name Simon and Id to be > or < of
     .where('name', '=', 'Simon')
     .andOrWhere('id', '>', '<' 35)
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -379,7 +386,7 @@ Get all records which the column is null
     .from('tableName')
     .whereNull('name') // get all records which the column name is null
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -393,7 +400,7 @@ Get all records which the column is not null
     .from('tableName')
     .whereNotNull('name') // get all records which the column name is NOT null
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -407,7 +414,7 @@ Get all records which the column is between two values
     .from('tableName')
     .whereBetween('id', [22, 300], 'OR') // Get all records between 22 and 300
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -421,7 +428,7 @@ Get all records which the column is not between two values
     .from('tableName')
     .whereNotBetween('id', [22, 300], 'AND') // Get all records which is not between 22 and 300
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -435,7 +442,7 @@ Get all records which the column value is equal to some parameters which is set
     .from('tableName')
     .whereIn('id', [2, 4, 6, 3, 8], 'AND') // Get all records with id 2, 3, 4, 6, 8
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -449,7 +456,7 @@ Get all records which the column value is not equal to some parameters which is 
     .from('tableName')
     .whereNotIn('id', [2, 4, 6, 3, 8], 'OR') // Get all records which the id is not 2, 3, 4, 6, 8
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -463,7 +470,7 @@ Get all records which the first column and second column has same values on data
     .from('tableName')
     .whereColumn('title', 'name', '=', 'OR') // Get all records which the title and name is same
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -477,7 +484,7 @@ Get all records where the column createTime is equal to 2010-04-01 Date Time
     .from('tableName')
     .whereDate('createTime', '=', '2010-04-01')
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -491,7 +498,7 @@ Get all records where the column createTime is from 2010
     .from('tableName')
     .whereYear('createTime', '=', '2010', 'OR')
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -505,7 +512,7 @@ Get all records where the column createTime is with month equal to 10
     .from('tableName')
     .whereMonth('createTime', '=', '10', 'OR')
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -519,7 +526,7 @@ Get all records where the column createTime is with day equal to 22
     .from('tableName')
     .whereDay('createTime', '=', '22', 'OR')
   qBuilder.prepare().getResult((err, data) => {
-
+    // data is the array of objects
   })
 ```
 
@@ -686,6 +693,125 @@ qBuilder.prepare()
 ```
 
 
+## Helper Queries
+From v1.3.1 Is possible to used mysql-qbuilder much easier for some common cases like
+* Add some record on database
+* Get first element from table
+* Get last element from table
+* Get all elements from table
+* Find element by Id
+* Find elements by few columns from table
+
+### IMPORTANT: For to Used Helper Queries is not need to start with `makeQuery()`
+### Is need to start with `useScheme('tableName')`
+### If You want to used same table from database then is not need anymore to set table only used `useScheme()`
+
+
+## Add
+Add new record on database
+```JavaScript
+qBuilder.useScheme('tableName')
+
+  // First field is Object where the keys is column of database and values is the values of columns
+  .add({ 'username': 'administrator', 'email': 'administrator@admin.com' })
+
+qBuilder.execute()
+```
+
+
+## Get First
+Get first record from table
+```JavaScript
+qBuilder.useScheme() // used same table like before
+
+  // First field is String or Array with all columns which You want to get from database
+  .getFirst('email, username')
+
+qBuilder.getResult((err, data) => {
+  if (err) {
+    console.log(err)
+  } else {
+    // make something with data which is result of mysql query execution
+  }
+})
+```
+
+
+## Get Last
+Get last record from table
+```JavaScript
+qBuilder.useScheme() // used same table like before
+
+  // First field is String or Array with all columns which You want to get from database
+  .getLast('email, username')
+
+qBuilder.getResult((err, data) => {
+  if (err) {
+    console.log(err)
+  } else {
+    // make something with data which is result of mysql query execution
+  }
+})
+```
+
+
+## Get All
+Get all records from table
+```JavaScript
+qBuilder.useScheme() // used same table like before
+
+  // First field is String or Array with all columns which You want to get from database
+  .getAll('email, username')
+
+qBuilder.getResult((err, data) => {
+  if (err) {
+    console.log(err)
+  } else {
+    // make something with data which is result of mysql query execution
+  }
+})
+```
+
+
+## Find by Id
+Find record on database by entered id
+```JavaScript
+qBuilder.useScheme('tableName')
+
+  // First field is id of the record
+  // Second is all columns which You want to get from database
+  .findById(2, 'email')
+
+qBuilder.getResult((err, data) => {
+  if (err) {
+    console.log(err)
+  } else {
+    // make something with data which is result of mysql query execution
+  }
+})
+```
+
+
+## Find by Fields
+Find records on database by many search conditions or (only one)
+```JavaScript
+qBuilder.useScheme('tableName')
+
+  // First field is Object where the keys is column of database and values is the values of columns
+  // Second is all columns which You want to get from database
+  // Third is do You want every condition to be true or only one
+  .findByFields({ 'id': 2, 'username': 'administrator' }, 'email', 'or')
+
+qBuilder.getResult((err, data) => {
+  if (err) {
+    console.log(err)
+  } else {
+    // make something with data which is result of mysql query execution
+  }
+})
+```
+
+
 ## How to write Your own Query
 ### To write Your own query is need only to call method setCommand
 
@@ -714,6 +840,14 @@ qBuilder.getMysql()
 ```
 
 ## Change log
+* v1.3.1
+* * Add Helper Query functions with for some common cases like:
+* * `add` Add record on database
+* * `getFirst` Get first element from table
+* * `getLast` Get last element from table
+* * `getAll` Get all elements from table
+* * `findById` Find record from table by id
+* * `findByFields` Find records from table by selected few columns
 * v1.2.0
 * * Add `WhereDay` `WhereMonth` `WhereYear`
 * * Add One more (Optional) Parameter on Where methods which is possible choose between AND or OR (Default = AND)
