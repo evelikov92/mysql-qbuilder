@@ -13,6 +13,8 @@
 - [Install](#install)
 - [Introduction](#introduction)
 - [Clauses](#clauses)
+- [Examples](#examples)
+- [Select clauses](#select-clauses)
 
 ## Install
 
@@ -64,7 +66,7 @@ All common cases to use the `sql query clauses`
 * `TABLE`
 
 
-## How to use
+## Examples
 
 ### Require the module
 ```JavaScript
@@ -93,7 +95,7 @@ qBuilder.connectToDatabase()
 qBuilder.makeQuery()
 ```
 
-## Select `select()` `addSelect()`
+## Select clauses `select()` `addSelect()`
 
 Some times You don't want to select all columns from database
 Then You need to enter just the columns.
