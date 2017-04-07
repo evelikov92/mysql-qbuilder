@@ -1,6 +1,6 @@
 const mysql = require('mysql')
 const queryBuilder = require('./lib/QueryBuilder')
-// const dbBuilder = require('./lib/DatabaseBuilder')
+const dbBuilder = require('./lib/DatabaseBuilder')
 const queryModel = require('./lib/QueryModel')
 const parameters = require('./lib/Parameters')
 
