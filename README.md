@@ -12,8 +12,8 @@
 
 - [Install](#install)
 - [Introduction](#introduction)
-- [Clauses](#clauses)
 - [Before Start to Used](#before-start-to-used)
+- [Clauses](#clauses)
 - [SELECT](#select)
 - [INSERT](#insert)
 - [FROM Table](#from-table)
@@ -48,6 +48,37 @@ It can be used to perform most database operations in your application.
 mysql-qbuilder query builder uses mysql module to protect your application against SQL injection attacks.
 There is no need to clean strings being passed as bindings.
 
+
+## Before Start to Used
+Before to start to used the mysql-qbuilder is need to set some options
+In this section is show What You need for to work with mysql-qbuilder
+
+### Require the module
+```JavaScript
+const qBuilder = require('mysql-qbuilder')
+```
+
+### Set the parameters for mysql connection
+```JavaScript
+qBuilder.setOptions({
+ hostname: 'hostName',
+ username: 'userName',
+ password: 'passWord',
+ database: 'databaseName'
+})
+```
+
+### Then connecto to database
+```JavaScript
+qBuilder.connectToDatabase()
+```
+
+### Start to make query
+```JavaScript
+qBuilder.makeQuery()
+```
+
+
 ## Clauses
 All common cases to use the `sql query clauses`
 ---
@@ -80,37 +111,6 @@ All common cases to use the `sql query clauses`
 * `FROM`
 * `TABLE`
 
-
-## Before Start to Used
-Before to start to used the mysql-qbuilder is need to set some options
-In this section is show What You need for to work with mysql-qbuilder
-
-### Require the module
-```JavaScript
-const qBuilder = require('mysql-qbuilder')
-```
-
-### Set the parameters for mysql connection
-```JavaScript
-qBuilder.setOptions({
- hostname: 'hostName',
- username: 'userName',
- password: 'passWord',
- database: 'databaseName'
-})
-```
-
-### Then connecto to database
-```JavaScript
-qBuilder.connectToDatabase()
-```
-
-### Start to make query
-```JavaScript
-qBuilder.makeQuery()
-```
-
-# EXAMPLES
 
 ## SELECT
 ### `select()` `addSelect()`
