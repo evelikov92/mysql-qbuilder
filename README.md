@@ -13,7 +13,7 @@
 - [Install](#install)
 - [Introduction](#introduction)
 - [Clauses](#clauses)
-- [Examples](#examples)
+- [Before Start to Used](#before-start-to-used)
 - [SELECT](#select)
 - [INSERT](#insert)
 - [FROM Table](#from-table)
@@ -81,13 +81,14 @@ All common cases to use the `sql query clauses`
 * `TABLE`
 
 
-## Examples
+## Before Start to Used
+Before to start to used the mysql-qbuilder is need to set some options
+In this section is show What You need for to work with mysql-qbuilder
 
 ### Require the module
 ```JavaScript
 const qBuilder = require('mysql-qbuilder')
 ```
-
 
 ### Set the parameters for mysql connection
 ```JavaScript
@@ -104,11 +105,11 @@ qBuilder.setOptions({
 qBuilder.connectToDatabase()
 ```
 
-
 ### Start to make query
 ```JavaScript
 qBuilder.makeQuery()
 ```
+
 
 ## SELECT
 ### `select()` `addSelect()`
