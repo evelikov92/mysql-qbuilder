@@ -714,6 +714,6 @@ qBuilder.getMysql()
 ```
 
 ## Change log
-* v1.2.1
+* v1.2.0
 * * Add `WhereDay` `WhereMonth` `WhereYear`
 * * Add One more (Optional) Parameter on Where methods which is possible choose between AND or OR (Default = AND)
