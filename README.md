@@ -12,6 +12,7 @@
 
 - [Install](#install)
 - [Introduction](#introduction)
+- [Clauses](#clauses)
 
 ## Install
 
@@ -30,7 +31,7 @@ It can be used to perform most database operations in your application.
 mysql-qbuilder query builder uses mysql module to protect your application against SQL injection attacks.
 There is no need to clean strings being passed as bindings.
 
-## What You get from that module
+## Clauses
 All common cases to use the `sql query clauses`
 ---
 * `SELECT`
