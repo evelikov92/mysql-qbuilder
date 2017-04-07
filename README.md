@@ -95,7 +95,8 @@ qBuilder.connectToDatabase()
 qBuilder.makeQuery()
 ```
 
-## Select clauses `select()` `addSelect()`
+## Select clauses
+### `select()` `addSelect()`
 
 Some times You don't want to select all columns from database
 Then You need to enter just the columns.
