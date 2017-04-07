@@ -2,11 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/mysql-qbuilder.svg)]()
 [![node](https://img.shields.io/node/v/mysql-qbuilder.svg)]()
-[![Build Status](https://semaphoreapp.com/api/v1/projects/d4cca506-99be-44d2-b19e-176f36ec8cf1/128505/shields_badge.svg)](https://semaphoreapp.com/boennemann/badges)
 [![npm](https://img.shields.io/npm/l/mysql-qbuilder.svg)]()
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![Known Vulnerabilities](https://snyk.io/test/npm/mysql-qbuilder/badge.svg)](https://snyk.io/test/npm/mysql-qbuilder)
-[![npm](https://img.shields.io/npm/dm/mysql-qbuilder.svg)]()
 [![npm](https://img.shields.io/npm/dt/mysql-qbuilder.svg)]()
 
 ## Table of Contents
