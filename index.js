@@ -1,6 +1,5 @@
 const mysql = require('mysql')
 const queryBuilder = require('./lib/QueryBuilder')
-// const dbBuilder = require('./lib/DatabaseBuilder')
 const queryModel = require('./lib/QueryModel')
 const parameters = require('./lib/Parameters')
 
@@ -40,14 +39,6 @@ exports.connectToDatabase = () => {
 exports.closeTheConnection = () => {
   connection.end()
 }
-
-// /**
-//  * [Start to change the Database strcture]
-//  * @return {DatabaseBuilder} [Database Builder Creator for modify the structure of Table on database]
-//  */
-// exports.setDatabaseStructure = () => {
-//   return dbBuilder
-// }
 
 /**
  * [Make table scheme and use some common methods]
@@ -121,7 +112,6 @@ exports.getCommand = () => {
  */
 exports.prepare = function () {
   parameters.prepare()
-
   return this
 }
 
@@ -131,11 +121,11 @@ exports.prepare = function () {
 exports.execute = function () {
   if (parameters.command.indexOf('?') !== -1) {
     connection.query(parameters.command, parameters.params, (err, result) => {
-      if (err) console.log(err)
+      if (err) throw new Error(err)
     })
   } else {
     connection.query(parameters.command, (err, result) => {
-      if (err) console.log(err)
+      if (err) throw new Error(err)
     })
   }
 }
@@ -147,12 +137,12 @@ exports.execute = function () {
 exports.getResult = (callback) => {
   if (parameters.command.indexOf('?') !== -1) {
     connection.query(parameters.command, parameters.params, (err, rows, fields) => {
-      if (err) callback(err, null)
+      if (err) return callback(err, null)
       callback(null, JSON.parse(JSON.stringify(rows)))
     })
   } else {
     connection.query(parameters.command, (err, rows, fields) => {
-      if (err) callback(err, null)
+      if (err) return callback(err, null)
       callback(null, JSON.parse(JSON.stringify(rows)))
     })
   }
