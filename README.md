@@ -7,7 +7,7 @@
  [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
  [![npm](https://img.shields.io/npm/dm/mysql-qbuilder.svg)]()
  [![npm](https://img.shields.io/npm/dt/mysql-qbuilder.svg)]()
- 
+
 ## Table of Contents
 
 - [Install](#install)
@@ -781,6 +781,8 @@ qBuilder.useScheme('tableName')
   // First field is id of the record
   // Second is all columns which You want to get from database
   .findById(2, 'email')
+  // OR
+  .findById([2, 3, 4], 'email') // Is find records with id 2, 3 or 4
 
 qBuilder.getResult((err, data) => {
   if (err) {
@@ -801,6 +803,8 @@ qBuilder.useScheme('tableName')
   // Second is all columns which You want to get from database
   // Third is do You want every condition to be true or only one
   .findByFields({ 'id': 2, 'username': 'administrator' }, 'email', 'or')
+  // Or Get all records which is with id 2, 3 or 4 or have username administrator or userNaMe
+  .findByFields({ 'id': [2, 3, 4], 'username': ['administrator', 'userNaMe'] }, 'email', 'or')
 
 qBuilder.getResult((err, data) => {
   if (err) {
@@ -840,6 +844,8 @@ qBuilder.getMysql()
 ```
 
 ## Change log
+* v1.4.1
+* * Add one more option for findById and findByFields searching not only by one value
 * v1.3.1
 * * Add Helper Query functions with for some common cases like:
 * * * `add` Add record on database
