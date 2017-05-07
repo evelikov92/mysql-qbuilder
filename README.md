@@ -918,6 +918,8 @@ qBuilder.getMysql()
 ```
 
 ## Change log
+* v1.5.2
+* * Make the getResult() to work with both callback or Promise
 * v1.5.1
 * * Replace the callback of the getResult with Promise
 * * If the getResult() return only one element then is return directly object. Not like to now array of one object.
