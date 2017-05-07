@@ -140,10 +140,16 @@ If You forget some column then You can add that columns with addSelect function
     .select('id, title, count') // Oops I forgot the name column
     .addSelect('name') // Alright I added now
     .from('tableName') // set Database table
-  qBuilder.prepare()
-    .getResult((err, data) => {
-      // data is the array of objects or just single object
+  qBuilder.prepare().getResult() // New version bigger of 1.5.1
+    .then(result => {
+
     })
+    .catch(err => {
+
+    })
+  qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+      // data is the array of objects or just single object
+  })
 ```
 
 
@@ -171,9 +177,15 @@ The from and table method is just set the table of query
   qBuilder.makeQuery()
     .select('id, title, count') // Oops I forgot the name column
     .from('tableName') // set Database table
-  qBuilder.prepare()
-    .getResult((err, data) => {
-      // data is the array of objects or just single object
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
     })
 ```
 
@@ -218,9 +230,15 @@ With Join is possible to get from database record from two tables with one query
     .from('tableName') // set Database table
     .join('anotherTable', 'tableName.anotherTableId = anotherTable.id', 'Inner')
     .where('tableName.id' '>' 2)
-  qBuilder.prepare()
-    .getResult((err, data) => {
-      // data is the array of objects
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
     })
 ```
 
@@ -236,10 +254,16 @@ Is A method which You can order by some column
     .from('tableName') // set Database table
     .where('id' '>' 2)
     .orderBy('name', true) // Then is to be sorted in DESC
-  qBuilder.prepare()
-    .getResult((err, data) => {
-      // data is the array of objects or just single object
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 
@@ -254,10 +278,16 @@ Is A method which You can group by some column
     .from('tableName') // set Database table
     .where('id' '>' 2)
     .groupBy('name')
-  qBuilder.prepare()
-    .getResult((err, data) => {
-      // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ## LIMIT
@@ -271,10 +301,16 @@ Is A method which You can get only few records from database
     .from('tableName') // set Database table
     .where('id' '>' 2)
     .take(500) // Get first 500 results
-  qBuilder.prepare()
-    .getResult((err, data) => {
-      // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 
@@ -290,10 +326,16 @@ Is A method which You can skip first few records from database
     .where('id' '>' 2)
     .take(500) // Get results from 201 to 701
     .skip(200) // Skip the first 200 results
-  qBuilder.prepare()
-    .getResult((err, data) => {
-      // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ## NOTICE `From Previous version and that version the some secondary where clauses have one more extra (optional) parameter (andOr), where can set AND or OR. On previous version was AND and now default value is AND`
@@ -311,9 +353,16 @@ The third argument is the value of column name on database
     .select('*')
     .from('tableName')
     .where('id', '=', 10)
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `WhereNot()`
@@ -326,9 +375,16 @@ Where clause is is check do condition is not true
     .from('tableName')
     .whereNot('id', '=', 10, 'OR') // Get all Elements where id is not equal to 10
     .andWhere('name', '=', 'Simon')
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `andWhere()`
@@ -340,9 +396,16 @@ Add another state and tell of the query to be both equal to true
     .from('tableName')
     .where('id', '=', 10)
     .andWhere('name', '=', 'Simon')
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `orWhere()`
@@ -354,9 +417,16 @@ Add another state and tell of the query to be first or second or both equal to t
     .from('tableName')
     .where('id', '=', 10)
     .orWhere('name', '=', 'Simon')
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `andOrWhere()`
@@ -371,9 +441,16 @@ Like example is tell give me every record with name Simon and Id to be > or < of
     .from('tableName')
     .where('name', '=', 'Simon')
     .andOrWhere('id', '>', '<' 35)
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereNull()`
@@ -385,9 +462,16 @@ Get all records which the column is null
     .select('*')
     .from('tableName')
     .whereNull('name') // get all records which the column name is null
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereNotNull()`
@@ -399,9 +483,16 @@ Get all records which the column is not null
     .select('*')
     .from('tableName')
     .whereNotNull('name') // get all records which the column name is NOT null
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereBetween()`
@@ -413,9 +504,16 @@ Get all records which the column is between two values
     .select('*')
     .from('tableName')
     .whereBetween('id', [22, 300], 'OR') // Get all records between 22 and 300
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereNotBetween()`
@@ -427,9 +525,16 @@ Get all records which the column is not between two values
     .select('*')
     .from('tableName')
     .whereNotBetween('id', [22, 300], 'AND') // Get all records which is not between 22 and 300
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereIn`
@@ -441,9 +546,16 @@ Get all records which the column value is equal to some parameters which is set
     .select('*')
     .from('tableName')
     .whereIn('id', [2, 4, 6, 3, 8], 'AND') // Get all records with id 2, 3, 4, 6, 8
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereNotIn`
@@ -455,9 +567,16 @@ Get all records which the column value is not equal to some parameters which is 
     .select('*')
     .from('tableName')
     .whereNotIn('id', [2, 4, 6, 3, 8], 'OR') // Get all records which the id is not 2, 3, 4, 6, 8
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereColumn`
@@ -469,9 +588,16 @@ Get all records which the first column and second column has same values on data
     .select('*')
     .from('tableName')
     .whereColumn('title', 'name', '=', 'OR') // Get all records which the title and name is same
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereDate`
@@ -483,9 +609,16 @@ Get all records where the column createTime is equal to 2010-04-01 Date Time
     .select('*')
     .from('tableName')
     .whereDate('createTime', '=', '2010-04-01')
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereYear`
@@ -497,9 +630,16 @@ Get all records where the column createTime is from 2010
     .select('*')
     .from('tableName')
     .whereYear('createTime', '=', '2010', 'OR')
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereMonth`
@@ -511,9 +651,16 @@ Get all records where the column createTime is with month equal to 10
     .select('*')
     .from('tableName')
     .whereMonth('createTime', '=', '10', 'OR')
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 ### `whereDay`
@@ -525,9 +672,16 @@ Get all records where the column createTime is with day equal to 22
     .select('*')
     .from('tableName')
     .whereDay('createTime', '=', '22', 'OR')
-  qBuilder.prepare().getResult((err, data) => {
-    // data is the array of objects
-  })
+    qBuilder.prepare().getResult() // New version bigger of 1.5.1
+      .then(result => {
+
+      })
+      .catch(err => {
+
+      })
+    qBuilder.prepare().getResult((err, data) => { // Old version less of 1.5.1
+        // data is the array of objects or just single object
+    })
 ```
 
 
@@ -683,7 +837,14 @@ qBuilder.prepare()
   // Set all parameters which You need to used on mysql query builder
   .setParameters([param1, param2, param3])
   // Get the result of executed query
-  .getResult((err, data) => { // is return the Array
+  qBuilder.getResult() // New version bigger of 1.5.1
+    .then(result => {
+
+    })
+    .catch(err => {
+
+    })
+  qBuilder.getResult((err, data) => { // Old version less of 1.5.1
     if (err) {
       console.log(err)
     } else {
@@ -727,13 +888,20 @@ qBuilder.useScheme() // used same table like before
   // First field is String or Array with all columns which You want to get from database
   .getFirst('email, username')
 
-qBuilder.getResult((err, data) => {
-  if (err) {
-    console.log(err)
-  } else {
-    // make something with data which is result of mysql query execution
-  }
-})
+  qBuilder.getResult() // New version bigger of 1.5.1
+    .then(result => {
+
+    })
+    .catch(err => {
+
+    })
+  qBuilder.getResult((err, data) => { // Old version less of 1.5.1
+    if (err) {
+      console.log(err)
+    } else {
+      // make something with data which is result of mysql query execution
+    }
+  })
 ```
 
 
@@ -745,13 +913,20 @@ qBuilder.useScheme() // used same table like before
   // First field is String or Array with all columns which You want to get from database
   .getLast('email, username')
 
-qBuilder.getResult((err, data) => {
-  if (err) {
-    console.log(err)
-  } else {
-    // make something with data which is result of mysql query execution
-  }
-})
+  qBuilder.getResult() // New version bigger of 1.5.1
+    .then(result => {
+
+    })
+    .catch(err => {
+
+    })
+  qBuilder.getResult((err, data) => { // Old version less of 1.5.1
+    if (err) {
+      console.log(err)
+    } else {
+      // make something with data which is result of mysql query execution
+    }
+  })
 ```
 
 
@@ -763,13 +938,20 @@ qBuilder.useScheme() // used same table like before
   // First field is String or Array with all columns which You want to get from database
   .getAll('email, username')
 
-qBuilder.getResult((err, data) => {
-  if (err) {
-    console.log(err)
-  } else {
-    // make something with data which is result of mysql query execution
-  }
-})
+  qBuilder.getResult() // New version bigger of 1.5.1
+    .then(result => {
+
+    })
+    .catch(err => {
+
+    })
+  qBuilder.getResult((err, data) => { // Old version less of 1.5.1
+    if (err) {
+      console.log(err)
+    } else {
+      // make something with data which is result of mysql query execution
+    }
+  })
 ```
 
 
@@ -784,13 +966,20 @@ qBuilder.useScheme('tableName')
   // OR
   .findById([2, 3, 4], 'email') // Is find records with id 2, 3 or 4
 
-qBuilder.getResult((err, data) => {
-  if (err) {
-    console.log(err)
-  } else {
-    // make something with data which is result of mysql query execution
-  }
-})
+  qBuilder.getResult() // New version bigger of 1.5.1
+    .then(result => {
+
+    })
+    .catch(err => {
+
+    })
+  qBuilder.getResult((err, data) => { // Old version less of 1.5.1
+    if (err) {
+      console.log(err)
+    } else {
+      // make something with data which is result of mysql query execution
+    }
+  })
 ```
 
 
@@ -806,13 +995,20 @@ qBuilder.useScheme('tableName')
   // Or Get all records which is with id 2, 3 or 4 or have username administrator or userNaMe
   .findByFields({ 'id': [2, 3, 4], 'username': ['administrator', 'userNaMe'] }, 'email', 'or')
 
-qBuilder.getResult((err, data) => {
-  if (err) {
-    console.log(err)
-  } else {
-    // make something with data which is result of mysql query execution
-  }
-})
+  qBuilder.getResult() // New version bigger of 1.5.1
+    .then(result => {
+
+    })
+    .catch(err => {
+
+    })
+  qBuilder.getResult((err, data) => { // Old version less of 1.5.1
+    if (err) {
+      console.log(err)
+    } else {
+      // make something with data which is result of mysql query execution
+    }
+  })
 ```
 
 
@@ -826,13 +1022,20 @@ qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
   // Set all parameters which You need to used on mysql query builder
   .setParameters([param1])
   // Get the result of executed query
-  .getResult((err, data) => { // is return the Array
+  .getResult() // New version bigger of 1.5.1
+    .then(result => {
+
+    })
+    .catch(err => {
+
+    })
+  .getResult((err, data) => { // Old version less of 1.5.1
     if (err) {
       console.log(err)
     } else {
       // make something with data which is result of mysql query execution
     }
- })
+  })
 ```
 
 
@@ -844,6 +1047,9 @@ qBuilder.getMysql()
 ```
 
 ## Change log
+* v1.5.1
+* * Replace the callback of the getResult with Promise
+* * If the getResult() return only one element then is return directly object. Not like to now array of one object.
 * v1.4.1
 * * Add one more option for findById and findByFields searching not only by one value
 * v1.3.1
