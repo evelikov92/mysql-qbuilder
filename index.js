@@ -128,13 +128,20 @@ exports.execute = function () {
  * [Get the result from created sql query]
  * @return {Promise} [Promise of result of query string]
  */
-exports.getResult = () => {
-  return new Promise((resolve, reject) => {
+exports.getResult = (callback) => {
+  if (callback) { // old version
     connection.query(parameters.command, parameters.params, (err, rows, fields) => {
-      if (err) return reject(err)
-
-      if (rows.length === 1) return resolve(JSON.parse(JSON.stringify(rows))[0])
-      else return resolve(JSON.parse(JSON.stringify(rows)))
+      if (err) return callback(err, null)
+      callback(null, JSON.parse(JSON.stringify(rows)))
     })
-  })
+  } else { // new version
+    return new Promise((resolve, reject) => {
+      connection.query(parameters.command, parameters.params, (err, rows, fields) => {
+        if (err) return reject(err)
+
+        if (rows.length === 1) return resolve(JSON.parse(JSON.stringify(rows))[0])
+        else return resolve(JSON.parse(JSON.stringify(rows)))
+      })
+    })
+  }
 }
