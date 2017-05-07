@@ -119,20 +119,14 @@ exports.prepare = function () {
  * [Run the sql query on mysql]
  */
 exports.execute = function () {
-  if (parameters.command.indexOf('?') !== -1) {
-    connection.query(parameters.command, parameters.params, (err, result) => {
-      if (err) throw new Error(err)
-    })
-  } else {
-    connection.query(parameters.command, (err, result) => {
-      if (err) throw new Error(err)
-    })
-  }
+  connection.query(parameters.command, parameters.params, (err, result) => {
+    if (err) throw new Error(err)
+  })
 }
 
 /**
  * [Get the result from created sql query]
- * @return {Promise} [description]
+ * @return {Promise} [Promise of result of query string]
  */
 exports.getResult = () => {
   return new Promise((resolve, reject) => {
@@ -144,20 +138,3 @@ exports.getResult = () => {
     })
   })
 }
-
-exports.setOptions({
-  hostname: 'localhost',
-  username: 'root',
-  password: '',
-  database: 'smartgrowcontroller'
-})
-exports.connectToDatabase()
-exports.makeQuery()
-  .select('id, title, addr').from('sensors').where('id', '>', 2)
-exports.prepare().getResult()
-  .then(result => {
-    console.log(result)
-  })
-  .catch(err => {
-    console.log(err)
-  })
