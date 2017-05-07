@@ -130,42 +130,95 @@ exports.execute = function () {
   }
 }
 
-
 // TODO Not tested
-exports.getResult = new Promise((resolve, reject) => {
+exports.getResult = new Promise(function (resolve, reject) {
   if (parameters.command.indexOf('?') !== -1) {
-    connection.query(parameters.command, parameters.params, (err, rows, fields) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(JSON.parse(JSON.stringify(rows)))
-      }
-    })
+    resolve(`sssS${parameters.command}`)
+    // connection.query(parameters.command, parameters.params, (err, rows, fields) => {
+    //   if (err) {
+    //     reject(err)
+    //   } else {
+    //     resolve(JSON.parse(JSON.stringify(rows)))
+    //   }
+    // })
   } else {
-    connection.query(parameters.command, (err, rows, fields) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(JSON.parse(JSON.stringify(rows)))
-      }
-    })
+    var x = JSON.parse(JSON.stringify(parameters))
+    resolve(parameters)
+    // resolve(JSON.parse(JSON.stringify(parameters)))
+    // connection.query(parameters.command, (err, rows, fields) => {
+    //   if (err) {
+    //     reject(err)
+    //   } else {
+    //     resolve(JSON.parse(JSON.stringify(rows)))
+    //   }
+    // })
   }
 })
+
+exports.getResult = () => {
+  return new Promise((resolve, reject) => {
+    if (parameters.command.indexOf('?') !== -1) {
+      connection.query(parameters.command, parameters.params, (err, rows, fields) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(JSON.parse(JSON.stringify(rows)))
+        }
+      })
+    } else {
+      connection.query(parameters.command, (err, rows, fields) => {
+        if (err) {
+          return reject(err)
+        } else {
+          return resolve(JSON.parse(JSON.stringify(rows)))
+        }
+      })
+    }
+  })
+}
 
 /**
  * [Get the result from created sql query]
  * @param {fn} callback [Callback where first parameter is Error and second is list of records]
  */
-exports.getResult = (callback) => {
-  if (parameters.command.indexOf('?') !== -1) {
-    connection.query(parameters.command, parameters.params, (err, rows, fields) => {
-      if (err) return callback(err, null)
-      callback(null, JSON.parse(JSON.stringify(rows)))
-    })
-  } else {
-    connection.query(parameters.command, (err, rows, fields) => {
-      if (err) return callback(err, null)
-      callback(null, JSON.parse(JSON.stringify(rows)))
-    })
-  }
-}
+// exports.getResult = (callback) => {
+//   if (parameters.command.indexOf('?') !== -1) {
+//     connection.query(parameters.command, parameters.params, (err, rows, fields) => {
+//       if (err) return callback(err, null)
+//       callback(null, JSON.parse(JSON.stringify(rows)))
+//     })
+//   } else {
+//     connection.query(parameters.command, (err, rows, fields) => {
+//       if (err) return callback(err, null)
+//       callback(null, JSON.parse(JSON.stringify(rows)))
+//     })
+//   }
+// }
+
+exports.setOptions({
+  hostname: 'localhost',
+  username: 'root',
+  password: '',
+  database: 'smartgrowcontroller'
+})
+exports.connectToDatabase()
+exports.makeQuery()
+  .select('title, addr')
+  .from('sensors')
+exports.prepare()
+exports.getResult()
+  .then(result => {
+    console.log(result)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+//
+// exports.makeQuery()
+//     .select('title, addr') // Oops I forgot the name column
+//     .from('sensors') // set Database table
+//   exports.prepare()
+//     .getResult((err, data) => {
+//       if (err) return console.log(err)
+//       console.log(data)
+//     })
