@@ -130,6 +130,28 @@ exports.execute = function () {
   }
 }
 
+
+// TODO Not tested
+exports.getResult = new Promise((resolve, reject) => {
+  if (parameters.command.indexOf('?') !== -1) {
+    connection.query(parameters.command, parameters.params, (err, rows, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(JSON.parse(JSON.stringify(rows)))
+      }
+    })
+  } else {
+    connection.query(parameters.command, (err, rows, fields) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(JSON.parse(JSON.stringify(rows)))
+      }
+    })
+  }
+})
+
 /**
  * [Get the result from created sql query]
  * @param {fn} callback [Callback where first parameter is Error and second is list of records]
