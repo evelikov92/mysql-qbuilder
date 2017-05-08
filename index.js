@@ -126,7 +126,8 @@ exports.execute = function () {
 
 /**
  * [Get the result from created sql query]
- * @return {Promise} [Promise of result of query string]
+ * @param {fn} callback [Callback where first parameter is Error and second is list of records]
+ * @return {Promise}    [Promise of result of query string]
  */
 exports.getResult = (callback) => {
   if (callback) { // old version
