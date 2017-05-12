@@ -33,8 +33,6 @@
 - - [Get All](#get-all)
 - - [Find by Id](#find-by-id)
 - - [Find by Fields](#find-by-fields)
-- [How to write Your own Query](#how-to-write-own-query)
-- [Get Mysql Module](#get-mysql-module)
 - [Change log](#change-log)
 
 ## Install
@@ -732,11 +730,6 @@ From v1.3.1 Is possible to used mysql-qbuilder much easier for some common cases
 * Find element by Id
 * Find elements by few columns from table
 
-### IMPORTANT:
-For to Used Helper Queries is not need to start with `makeQuery()` Is need to start with `useScheme('tableName')`
-If You want to used same table from database then is not need anymore to set table only used `useScheme()`
-
-
 ## Add
 Add new record on database
 ```JavaScript
@@ -878,41 +871,6 @@ qBuilder.useScheme('tableName')
       // make something with data which is result of mysql query execution
     }
   })
-```
-
-
-## How to write Your own Query
-### To write Your own query is need only to call method setCommand
-
-```JavaScript
-qBuilder.setCommand('SELECT * FROM Table WHERE id > ?')
-  // Build the query from all simple parts
-  .prepare()
-  // Set all parameters which You need to used on mysql query builder
-  .setParameters([param1])
-  // Get the result of executed query
-  .getResult() // New version bigger of 1.5.1
-    .then(result => {
-
-    })
-    .catch(err => {
-
-    })
-  .getResult((err, data) => { // Old version less of 1.5.1
-    if (err) {
-      console.log(err)
-    } else {
-      // make something with data which is result of mysql query execution
-    }
-  })
-```
-
-
-## Get Mysql Module
-### If You want to set more advanced options then You can get the MySql module
-
-```JavaScript
-qBuilder.getMysql()
 ```
 
 ## Change log
