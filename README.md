@@ -337,8 +337,6 @@ Is A method which You can skip first few records from database
     })
 ```
 
-## NOTICE `From Previous version and that version the some secondary where clauses have one more extra (optional) parameter (andOr), where can set AND or OR. On previous version was AND and now default value is AND`
-
 ## WHERE
 ### `where()`
 
