@@ -19,6 +19,7 @@
 - - [FROM Table](#from-table)
 - - [DELETE](#delete)
 - - [UPDATE](#update)
+- - [INSERT OR UPDATE](#insert-or-update)
 - - [JOIN](#join)
 - - [ORDER BY](#order-by)
 - - [GROUP BY](#group-by)
@@ -212,8 +213,29 @@ Some times is need just update the existing record in database. This is possible
     .update(['title', 'count', 'name'])
     .where('id', '=')
   qBuilder.prepare()
-    .setParameters(['newTitle', 25, 'newName'], 10) // The last parameter is for where clause
-    .execute()  
+    .setParameters(['newTitle', 25, 'newName', 10]) // The last parameter is for where clause
+    .execute()
+```
+
+## INSERT OR UPDATE
+### `addOrUpdate()`
+
+In some cases You need to add few new records on database, but some times that records is possible
+to get from database and need just to update if is exists on database
+
+#### IMPORTANT: In that case is need to have Unique index on table for can check do is exists
+#### For example here the unique key is need to be title and name
+##### Example for create the unique key: `CREATE UNIQUE INDEX title_name_index ON tableName (title, name)`
+
+```JavaScript
+qBuilder.makeQuery()
+  .table('tableName')
+  // First parameter is for try to add the elements
+  // Second parameters is for if is exists with same title and name then just update the count
+  .addOrUpdate(['title', 'count', 'name'], ['count'])
+qBuilder.prepare()
+  .setParameters(['newTitle', 25, 'newName', 25]) // Set the parameters
+  .execute()
 ```
 
 ## JOIN
