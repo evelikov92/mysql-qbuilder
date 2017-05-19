@@ -896,6 +896,8 @@ qBuilder.useScheme('tableName')
 ```
 
 ## Change log
+* v1.6.1
+* * Add `addOrUpdate` You can check how to used from description
 * v1.5.2
 * * Make the getResult() to work with both callback or Promise
 * v1.5.1
