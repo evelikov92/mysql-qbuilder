@@ -1,6 +1,6 @@
 {
   "name": "mysql-qbuilder",
-  "version": "1.5.3",
+  "version": "1.6.1",
   "description": "Query Builder for MySQL",
   "main": "index.js",
   "scripts": {
